@@ -1,0 +1,67 @@
+{
+  "name": "MAMA PIZZA",
+  "welcome": "Bienvenido",
+  "aboutUs": "Sobre nosotros",
+  "metaDescription": "MAMA PIZZA, pizzería en Villaverde (Madrid). La pizza como tú la quieres, bocadillos, hamburguesas y ensaladas. 2x1 de lunes a jueves. Llama al 917954422.",
+  "phone": { "display": "917954422", "intl": "+34917954422" },
+  "email": "mamapizza6@gmail.com",
+  "address": {
+    "street": "Calle Parvillas Altas 6",
+    "postal": "28021",
+    "city": "Madrid",
+    "country": "España",
+    "full": "Calle Parvillas Altas 6, 28021 Madrid, España"
+  },
+  "geo": { "lat": 40.3449809, "lng": -3.7077763 },
+  "hours": [
+    { "day": 1, "open": "18:00", "close": "23:00" },
+    { "day": 2, "open": null, "close": null },
+    { "day": 3, "open": "18:00", "close": "23:00" },
+    { "day": 4, "open": "18:00", "close": "23:00" },
+    { "day": 5, "open": "18:00", "close": "23:30" },
+    { "day": 6, "open": "18:00", "close": "23:30" },
+    { "day": 0, "open": "18:00", "close": "23:00" }
+  ],
+  "offers": {
+    "lj": {
+      "h3": "Ofertas lunes a jueves",
+      "h4": "Todas las ofertas son para llevar",
+      "p": "2 x 1 en PIZZAS FAMILIARES O MEDIANAS 3 o MÁS INGREDIENTES DE LUNES A JUEVES (EXCEPTO FESTIVOS Y/O VÍSPERAS)"
+    },
+    "fs": {
+      "h3": "Ofertas fines de semana",
+      "h4": "Todas las ofertas son para llevar",
+      "p": "50% DESCUENTO EN SEGUNDA PIZZA FAMILIARES O MEDIANAS 3 o MÁS INGREDIENTES FIN DE SEMANA, VIERNES Y VÍSPERAS"
+    }
+  },
+  "reserve": {
+    "h3": "Reserva",
+    "h4": "Llámanos al 917954422",
+    "p": "LLÁMANOS Y RESERVA TU PEDIDO PARA LA HORA QUE QUIERAS"
+  },
+  "payment": ["En efectivo", "VISA"],
+  "services": ["Aire acondicionado", "Para llevar"],
+  "social": {
+    "tripadvisor": "https://www.tripadvisor.es/Restaurant_Review-g187514-d11658438-Reviews-Mama_Pizza-Madrid.html",
+    "facebook": "https://m.facebook.com/mamapizzavillaverde/?locale2=es_ES"
+  },
+  "privacyUrl": "https://website.dish.co/privacywebsite/data?id=1004590&standalone=TRUE&lang=es&modaldisplay=false",
+  "mapsSearch": "https://www.google.com/maps/search/?api=1&query=Calle+Parvillas+Altas+6,+28021+Madrid",
+  "mapsEmbed": "https://www.google.com/maps?q=Calle+Parvillas+Altas+6,+28021+Madrid&output=embed",
+  "legal": [
+    ["Nombre del negocio", "SEGOVIA BLANCO"],
+    ["Nombre y forma jurídica de la empresa", "S.L."],
+    ["Nombre", "JOSE"],
+    ["Apellido", "SEGOVIA"],
+    ["Dirección postal", "PARVILLAS ALTAS 6"],
+    ["Código postal", "28021"],
+    ["Localidad", "MADRID"],
+    ["País", "ESPAÑA"],
+    ["Número de teléfono", "+34639961541"],
+    ["Dirección de correo electrónico", "mamapizza6@gmail.com"],
+    ["Registro", "Registro de Sociedad"],
+    ["Número de registro", "Tomo 1560 Folio 177 Hoja 28621"],
+    ["Número de identificación fiscal", "B80102528"],
+    ["Responsable", "José Segovia"]
+  ]
+}

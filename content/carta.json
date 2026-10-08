@@ -1,0 +1,439 @@
+{
+  "pdf": {
+    "ing": "https://cdn.website.dish.co/media/30/42/4655350/Ingredientes.pdf",
+    "menu": "https://cdn.website.dish.co/media/3e/6e/9716432/Menu.pdf",
+    "por": "https://cdn.website.dish.co/media/3d/56/9716433/Porciones.pdf"
+  },
+  "offer": {
+    "title": "OFERTA:",
+    "lines": [
+      "2 x 1 en Pizzas medianas y familiares de 3 o más ingredientes.",
+      "Lunes a Jueves (sólo para llevar)",
+      "Oferta no válida en festivos y vísperas de fiesta",
+      "50% en segunda pizza fines de semana y festivos."
+    ]
+  },
+  "slogan": "La Pizza como tú la quieres....",
+  "slogan2": "También bocadillos, hamburguesas y ensaladas",
+  "sections": [
+    {
+      "id": "pizzas",
+      "label": "Pizzas",
+      "title": "PIZZAS",
+      "sub": "(PRECIO SEGÚN INGREDIENTES)",
+      "note": "Todas las Pizzas llevan como base : Salsa de Tomate y Mozzarella",
+      "sized": true,
+      "crop": {
+        "size": "170%",
+        "pos": "85% 45%"
+      },
+      "items": [
+        {
+          "n": "MAMA PIZZA BASE",
+          "m": "12,40",
+          "f": "18,60"
+        },
+        {
+          "n": "BASE + 1 INGREDIENTE",
+          "m": "14,20",
+          "f": "20,80"
+        },
+        {
+          "n": "BASE + 2 INGREDIENTES",
+          "m": "16,00",
+          "f": "23,00"
+        },
+        {
+          "n": "BASE + 3 INGREDIENTES",
+          "m": "17,80",
+          "f": "25,20"
+        },
+        {
+          "n": "BASE + 4 INGREDIENTES",
+          "m": "19,60",
+          "f": "27,40"
+        },
+        {
+          "n": "BASE + 5 INGREDIENTES",
+          "m": "21,40",
+          "f": "29,60"
+        },
+        {
+          "n": "SUPLEMENTO",
+          "m": "2,50",
+          "f": "3,00",
+          "s": true
+        }
+      ]
+    },
+    {
+      "id": "sugerencias",
+      "label": "Sugerencias",
+      "title": "PIZZAS (SUGERENCIAS)",
+      "sized": true,
+      "crop": {
+        "size": "260%",
+        "pos": "75% 30%"
+      },
+      "items": [
+        {
+          "n": "TROPICAL",
+          "d": "Base, Jamón y Piña (Base + 2 ingredientes)",
+          "m": "16,00",
+          "f": "23,00",
+          "ing": [
+            "Jamón York",
+            "Piña"
+          ],
+          "thumb": "72% 42%"
+        },
+        {
+          "n": "VEGETAL",
+          "d": "Base, Champiñón, Cebolla, Pim. verdes, Tomate natural (Base + 4 ingredientes)",
+          "m": "19,60",
+          "f": "27,40",
+          "ing": [
+            "Champiñón",
+            "Cebolla",
+            "Pimiento verde",
+            "Tomate"
+          ],
+          "thumb": "58% 55%"
+        },
+        {
+          "n": "4 ESTACIONES",
+          "d": "Base, Jamón, Champiñón, Chorizo, Tomate natural (Base + 4 ingredientes)",
+          "m": "19,60",
+          "f": "27,40",
+          "ing": [
+            "Jamón York",
+            "Champiñón",
+            "Chorizo",
+            "Tomate"
+          ],
+          "thumb": "80% 30%"
+        },
+        {
+          "n": "MARINA",
+          "d": "Base, Atún, Palometa ahumada, Anchoas, Pim. Morrón, Tomate natural (Base + 5 ingredientes)",
+          "m": "21,40",
+          "f": "29,60",
+          "ing": [
+            "Atún",
+            "Palometa ahumada",
+            "Anchoa ahumada",
+            "Pimiento rojo",
+            "Tomate"
+          ],
+          "thumb": "66% 70%"
+        },
+        {
+          "n": "MAMA PIZZA",
+          "d": "Base, Ternera, Bacon, Chorizo, Pim. verdes, Cebolla (Base + 5 ingredientes)",
+          "m": "21,40",
+          "f": "29,60",
+          "ing": [
+            "Ternera",
+            "Bacon",
+            "Chorizo",
+            "Pimiento verde",
+            "Cebolla"
+          ],
+          "thumb": "90% 52%"
+        }
+      ]
+    },
+    {
+      "id": "porciones",
+      "label": "Porciones",
+      "title": "PIZZAS (PORCIONES)",
+      "sized": false,
+      "crop": {
+        "size": "240%",
+        "pos": "100% 70%"
+      },
+      "items": [
+        {
+          "n": "MOZZARELLA",
+          "p": "3,00"
+        },
+        {
+          "n": "JAMON",
+          "p": "3,30"
+        },
+        {
+          "n": "BACON",
+          "p": "3,30"
+        },
+        {
+          "n": "4 QUESOS",
+          "p": "3,30"
+        },
+        {
+          "n": "CHAMPIÑÓN",
+          "p": "3,30"
+        },
+        {
+          "n": "CEBOLLA",
+          "p": "3,30"
+        },
+        {
+          "n": "CHORIZO",
+          "p": "3,40"
+        },
+        {
+          "n": "POLLO",
+          "p": "3,40"
+        },
+        {
+          "n": "ATUN",
+          "p": "3,40"
+        },
+        {
+          "n": "AHUMADOS",
+          "p": "3,40"
+        },
+        {
+          "n": "TERNERA",
+          "p": "3,40"
+        },
+        {
+          "n": "Suplemento ingrediente",
+          "p": "0,60",
+          "s": true
+        }
+      ]
+    },
+    {
+      "id": "calientes",
+      "label": "Bocadillos calientes",
+      "title": "BOCADILLOS CALIENTES",
+      "note": "Deliciosos bocadillos con pan recién horneado",
+      "sized": false,
+      "photo": {
+        "src": "calientes",
+        "pos": "50% 45%",
+        "alt": "BOCADILLOS CALIENTES en MAMA PIZZA, Villaverde (Madrid)"
+      },
+      "items": [
+        {
+          "n": "JAMON YORK, SALCHICHA FRANKFURT, CEBOLLA Y MAHONESA",
+          "p": "5,00"
+        },
+        {
+          "n": "BACON Y TOMATE (O QUESO)",
+          "p": "4,50"
+        },
+        {
+          "n": "LOMO ADOBADO Y TOMATE (O QUESO)",
+          "p": "5,00"
+        },
+        {
+          "n": "TORTILLA PATATAS Y PIM. VERDE (O MAHONESA)",
+          "p": "4,30"
+        },
+        {
+          "n": "TORTILLA PATATAS, JAMON SERRANO Y TOMATE",
+          "p": "5,00"
+        },
+        {
+          "n": "SUPLEMENTO POR PRODUCTO",
+          "p": "1,00",
+          "s": true
+        }
+      ]
+    },
+    {
+      "id": "frios",
+      "label": "Bocadillos fríos",
+      "title": "BOCADILLOS FRIOS",
+      "sized": false,
+      "photo": {
+        "src": "frios",
+        "pos": "50% 50%",
+        "alt": "BOCADILLOS FRIOS en MAMA PIZZA, Villaverde (Madrid)"
+      },
+      "items": [
+        {
+          "n": "VEGETAL (Tomate, lechuga, cebolla y pepinillo)",
+          "p": "4,00"
+        },
+        {
+          "n": "VEGETAL CON ATÚN",
+          "p": "4,50"
+        },
+        {
+          "n": "JAMÓN SERRANO Y TOMATE",
+          "p": "4,50"
+        },
+        {
+          "n": "CHORIZO, TABASCO Y MAHONESA",
+          "p": "4,50"
+        },
+        {
+          "n": "ROQUEFORT Y MANTEQUILLA",
+          "p": "5,00"
+        },
+        {
+          "n": "ATÚN, PIM.MORRÓN Y MAHONESA",
+          "p": "5,00"
+        },
+        {
+          "n": "PALOMETA AHUMADA, ANCHOAS Y MAHONESA",
+          "p": "5,00"
+        },
+        {
+          "n": "SUPLEMENTO POR PRODUCTO",
+          "p": "1,00",
+          "s": true
+        }
+      ]
+    },
+    {
+      "id": "hamburguesas",
+      "label": "Hamburguesas",
+      "title": "HAMBURGUESAS",
+      "sized": false,
+      "photo": {
+        "src": "hamburguesas",
+        "pos": "50% 42%",
+        "alt": "HAMBURGUESAS en MAMA PIZZA, Villaverde (Madrid)"
+      },
+      "items": [
+        {
+          "n": "HAMBURGUESA",
+          "d": "Carne de ternera con queso fundido, tomate, lechuga y cebolla",
+          "p": "5,00"
+        },
+        {
+          "n": "SUPLEMENTO (Cada uno)",
+          "p": "1,00",
+          "s": true
+        }
+      ]
+    },
+    {
+      "id": "perritos",
+      "label": "Perritos",
+      "title": "PERRITO CALIENTE",
+      "sized": false,
+      "photo": {
+        "src": "perritos",
+        "pos": "50% 50%",
+        "alt": "PERRITO CALIENTE en MAMA PIZZA, Villaverde (Madrid)"
+      },
+      "items": [
+        {
+          "n": "PERRITO CALIENTE (sencillo)",
+          "p": "2,70"
+        },
+        {
+          "n": "PERRITO ESPECIAL (con cebolla a la plancha y mozzarella)",
+          "p": "3,50"
+        }
+      ]
+    },
+    {
+      "id": "ensaladas",
+      "label": "Ensaladas",
+      "title": "ENSALADAS",
+      "sized": false,
+      "photo": {
+        "src": "ensaladas",
+        "pos": "50% 55%",
+        "alt": "ENSALADAS en MAMA PIZZA, Villaverde (Madrid)"
+      },
+      "items": [
+        {
+          "n": "ESPAÑOLA",
+          "d": "Lechuga, tomate, cebolla, atún y aceitunas",
+          "p": "4,00"
+        },
+        {
+          "n": "AMERICANA",
+          "d": "Lechuga, tomate, zanahoria, maíz, jamón york, queso y salsa rosa",
+          "p": "4,20"
+        }
+      ]
+    },
+    {
+      "id": "sandwiches",
+      "label": "Sandwiches",
+      "title": "SANDWICHES",
+      "sized": false,
+      "photo": {
+        "src": "sandwiches",
+        "pos": "50% 55%",
+        "alt": "SANDWICHES en MAMA PIZZA, Villaverde (Madrid)"
+      },
+      "items": [
+        {
+          "n": "MIXTO (Jamón y Queso)",
+          "p": "4,10"
+        },
+        {
+          "n": "VEGETAL (Tomate, lechuga, cebolla y pepinillo)",
+          "p": "3,70"
+        },
+        {
+          "n": "VEGETAL CON ATÚN",
+          "p": "4,10"
+        }
+      ]
+    }
+  ],
+  "ingredients": {
+    "title": "INGREDIENTES PIZZAS",
+    "crop": {
+      "size": "350%",
+      "pos": "68% 52%"
+    },
+    "groups": [
+      {
+        "g": "QUESOS:",
+        "i": [
+          "4 Quesos",
+          "Mozzarella",
+          "Roquefort"
+        ]
+      },
+      {
+        "g": "CARNES/EMBUTIDOS:",
+        "i": [
+          "Jamón Serrano",
+          "Jamón York",
+          "Bacon",
+          "Ternera",
+          "Pollo",
+          "Chorizo",
+          "Salchicha Frankfurt"
+        ]
+      },
+      {
+        "g": "PESCADOS (Conservas):",
+        "i": [
+          "Atún",
+          "Palometa ahumada",
+          "Anchoa ahumada"
+        ]
+      },
+      {
+        "g": "VEGETALES/FRUTAS:",
+        "i": [
+          "Piña",
+          "Champiñón",
+          "Tomate",
+          "Pimiento verde / Pimiento rojo",
+          "Cebolla",
+          "Aceitunas verdes / Aceitunas negras"
+        ]
+      },
+      {
+        "g": "OTROS:",
+        "i": [
+          "Salsa barbacoa"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "mama-pizza-web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Web estática de MAMA PIZZA (Villaverde, Madrid)",
+  "scripts": {
+    "test": "node --test \"tests/*.test.mjs\"",
+    "build": "node tools/build.mjs",
+    "serve": "npx --yes serve dist -l 4321",
+    "images": "node tools/images.mjs",
+    "icons": "node tools/icons.mjs",
+    "extract-i18n": "node tools/extract-i18n.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "@fontsource-variable/archivo": "^5.3.0",
+    "@phosphor-icons/core": "^2.1.1",
+    "node-html-parser": "^9.0.4",
+    "sharp": "^0.35.5",
+    "simple-icons": "^16.34.0"
+  }
+}
