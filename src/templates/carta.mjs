@@ -4,13 +4,19 @@ import { icon } from './icons.mjs';
 
 export const eur = (p, cls = '') => `<span class="eur${cls ? ' ' + cls : ''}">${esc(p)}<span aria-hidden="true"> €</span></span>`;
 
+// image-set() con type("...") lleva comillas dobles literales: hay que escaparlas (esc) antes de
+// insertar el resultado en un atributo style="..." delimitado también por comillas dobles, o el
+// HTML se corta en la primera comilla y el resto de la declaración (tamaño, posición) se pierde.
 const imgSet = (name, w = 960) => `image-set(url(/assets/img/${name}-${w}.avif) type("image/avif"), url(/assets/img/${name}-${w}.webp) type("image/webp"))`;
+const bgStyle = (decls) => esc(decls.join(';'));
 
 function banner(s) {
   if (s.photo) {
-    return `<div class="ban" role="img" aria-label="${esc(s.photo.alt)}" style="background-image:url(/assets/img/${s.photo.src}-960.webp);background-image:${imgSet(s.photo.src)};background-position:${s.photo.pos}"></div>`;
+    const style = bgStyle([`background-image:url(/assets/img/${s.photo.src}-960.webp)`, `background-image:${imgSet(s.photo.src)}`, `background-position:${s.photo.pos}`]);
+    return `<div class="ban" role="img" aria-label="${esc(s.photo.alt)}" style="${style}"></div>`;
   }
-  return `<div class="ban" aria-hidden="true" style="background-image:url(/assets/img/pizza-960.webp);background-image:${imgSet('pizza')};background-size:${s.crop.size};background-position:${s.crop.pos}"></div>`;
+  const style = bgStyle(['background-image:url(/assets/img/pizza-960.webp)', `background-image:${imgSet('pizza')}`, `background-size:${s.crop.size}`, `background-position:${s.crop.pos}`]);
+  return `<div class="ban" aria-hidden="true" style="${style}"></div>`;
 }
 
 function item(s, i) {
@@ -50,7 +56,7 @@ export function renderCarta({ t, carta }) {
 <p class="stamp" aria-hidden="true">MAMA PIZZA</p>
 ${carta.sections.map(section).join('\n')}
 <section id="carta-ing" class="cat ingl" aria-labelledby="h-ing">
-<div class="ban" aria-hidden="true" style="background-image:url(/assets/img/pizza-960.webp);background-image:${imgSet('pizza')};background-size:${ing.crop.size};background-position:${ing.crop.pos}"></div>
+<div class="ban" aria-hidden="true" style="${bgStyle(['background-image:url(/assets/img/pizza-960.webp)', `background-image:${imgSet('pizza')}`, `background-size:${ing.crop.size}`, `background-position:${ing.crop.pos}`])}"></div>
 <h3 id="h-ing">${esc(ing.title)}</h3>
 ${ing.groups.map((g) => `<p><b>${esc(g.g)}</b>${g.i.map(esc).join(', ')}</p>`).join('')}
 </section>

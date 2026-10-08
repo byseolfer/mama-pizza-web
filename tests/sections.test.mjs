@@ -254,3 +254,19 @@ test('pie: copyright nuevo y sin el crédito de DISH', () => {
   assert.ok(html.includes('© 2026 MAMA PIZZA'));
   assert.ok(!html.includes('DISH'));
 });
+
+test('carta: el estilo de cada franja no se trunca por comillas sin escapar y respeta su posición', () => {
+  const doc = cartaDoc();
+  // Posiciones reales de content/carta.json para dos franjas "crop" y una "photo".
+  const casos = [
+    ['sugerencias', carta.sections.find((s) => s.id === 'sugerencias').crop.pos],
+    ['porciones', carta.sections.find((s) => s.id === 'porciones').crop.pos],
+    ['frios', carta.sections.find((s) => s.id === 'frios').photo.pos]
+  ];
+  for (const [id, pos] of casos) {
+    const ban = doc.querySelector(`#carta-${id} .ban`);
+    const style = ban.getAttribute('style');
+    assert.ok(style.includes('type("image/webp")'), `${id}: el estilo se truncó antes de llegar al segundo formato — ${style}`);
+    assert.ok(style.includes(`background-position:${pos}`), `${id}: falta la posición ${pos} en "${style}"`);
+  }
+});
