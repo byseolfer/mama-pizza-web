@@ -54,3 +54,52 @@ test('barra móvil: llamar y ir al menú', () => {
   assert.ok(doc.querySelector('a[href="tel:+34917954422"]'));
   assert.ok(doc.querySelector('a[href="#menu"]'));
 });
+
+// ---------- Carta ----------
+import { renderCarta } from '../src/templates/carta.mjs';
+const cartaDoc = () => parse(renderCarta(ctx()));
+
+test('carta: sección #menu con H2 "Nuestro / menú"', () => {
+  const doc = cartaDoc();
+  assert.equal(doc.querySelector('section').getAttribute('id'), 'menu');
+  assert.deepEqual(doc.querySelectorAll('h2 > span').map((s) => s.text), ['Nuestro', 'menú']);
+});
+
+test('carta: 10 H3 con los títulos literales del PDF', () => {
+  const h3 = cartaDoc().querySelectorAll('h3');
+  assert.equal(h3.length, 10);
+  const titles = [...carta.sections.map((s) => s.title), carta.ingredients.title];
+  h3.forEach((h, i) => assert.ok(h.text.trim().startsWith(titles[i]), `${h.text} / ${titles[i]}`));
+});
+
+test('carta: están las 47 líneas de la carta', () => {
+  const total = carta.sections.reduce((a, s) => a + s.items.length, 0);
+  assert.equal(total, 47);
+  const names = cartaDoc().querySelectorAll('.n').map((n) => n.text.trim());
+  assert.equal(names.length, 47);
+  assert.ok(names.includes('PALOMETA AHUMADA, ANCHOAS Y MAHONESA'));
+});
+
+test('carta: enlaces a los PDF con su texto actual', () => {
+  const links = cartaDoc().querySelectorAll('.pdfs a').map((a) => [a.text.trim(), a.getAttribute('href')]);
+  assert.deepEqual(links, [['Ingredientes', carta.pdf.ing], ['Menú', carta.pdf.menu], ['Porciones', carta.pdf.por]]);
+});
+
+test('carta: el precio es literal y el € va aparte, oculto al lector', () => {
+  const eur = cartaDoc().querySelector('.eur');
+  assert.equal(eur.childNodes[0].text, '12,40');
+  assert.equal(eur.querySelector('span[aria-hidden="true"]').text.trim(), '€');
+});
+
+test('carta: el índice tiene un enlace por categoría', () => {
+  const doc = cartaDoc();
+  const targets = doc.querySelectorAll('.sheet a').map((a) => a.getAttribute('href'));
+  assert.deepEqual(targets, [...carta.sections.map((s) => `#carta-${s.id}`), '#carta-ing']);
+  for (const t of targets) assert.ok(doc.querySelector(t), t);
+});
+
+test('carta: las franjas con foto de stock tienen texto alternativo local', () => {
+  const bans = cartaDoc().querySelectorAll('.ban[role="img"]');
+  assert.equal(bans.length, 6);
+  for (const b of bans) assert.match(b.getAttribute('aria-label'), /en MAMA PIZZA, Villaverde \(Madrid\)$/);
+});
