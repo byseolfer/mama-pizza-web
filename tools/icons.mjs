@@ -1,7 +1,7 @@
 // Genera dist/assets/icons.svg: un sprite con los iconos de Phosphor (peso "bold", una sola familia)
 // y los logotipos de Simple Icons usados en el pie (tripAdvisor, Facebook).
 import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const PHOSPHOR = ['phone', 'book-open-text', 'list', 'x', 'map-pin', 'map-trifold', 'envelope-simple', 'money',
   'credit-card', 'snowflake', 'bag', 'scissors', 'file-pdf', 'list-bullets', 'paper-plane-tilt'];
@@ -34,7 +34,7 @@ export async function buildIcons({ outDir }) {
   return fileURLToPath(new URL('icons.svg', dir));
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const out = await buildIcons({ outDir: new URL('../dist/assets/', import.meta.url) });
   console.log('icons.svg ->', out);
 }

@@ -3,7 +3,7 @@
 // assets-src/map.png (ya oscurecido), para no volver a pedir teselas en cada build.
 import sharp from 'sharp';
 import { existsSync, mkdirSync, copyFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const PHOTOS = ['pizza', 'calientes', 'frios', 'hamburguesas', 'perritos', 'ensaladas', 'sandwiches'];
 const PHOTO_WIDTHS = [480, 960, 1600];
@@ -107,7 +107,7 @@ export async function buildImages({ srcDir, outDir }) {
   await mapImages(mapCache, out);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   await buildImages({ srcDir: new URL('../assets-src/', import.meta.url), outDir: new URL('../dist/assets/', import.meta.url) });
   console.log('Imágenes generadas en dist/assets/');
 }
