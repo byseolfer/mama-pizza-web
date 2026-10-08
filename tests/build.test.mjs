@@ -69,4 +69,9 @@ test('todos los enlaces internos #ancla apuntan a un id existente', () => {
   for (const h of hrefs) assert.ok(doc.querySelector(h), h);
 });
 
+test('el CSS no referencia clases que ya no existen en las plantillas (ej. legal-dialog)', () => {
+  const css = readFileSync(join(outDir, 'assets/site.css'), 'utf8');
+  assert.ok(!css.includes('.legal-dialog'), 'resto del refactor de la Tarea 9: la clase real es .legal-details');
+});
+
 test.after(() => rmSync(outDir, { recursive: true, force: true }));

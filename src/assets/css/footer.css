@@ -67,6 +67,6 @@
 .cookies-note button { font-size: 13px; font-weight: 700; text-decoration: underline; min-height: 36px; }
 
 @media (prefers-reduced-motion: no-preference) {
-  .legal-dialog:not([hidden]) .legal-modal, .cookies-note:not([hidden]) .box { animation: up .4s var(--ease); }
+  .legal-details.as-dialog .legal-modal, .cookies-note:not([hidden]) .box { animation: up .4s var(--ease); }
   @keyframes up { from { transform: translateY(24px); opacity: 0; } }
 }

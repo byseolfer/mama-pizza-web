@@ -40,7 +40,7 @@ function sitemap(siteUrl) {
 }
 
 export async function build({ siteUrl, formKey, outDir = 'dist' } = {}) {
-  siteUrl = siteUrl ?? process.env.SITE_URL;
+  siteUrl = siteUrl ?? process.env.SITE_URL ?? (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined);
   if (!siteUrl) throw new Error('SITE_URL es obligatoria');
   siteUrl = siteUrl.replace(/\/$/, '');
   formKey = formKey ?? process.env.WEB3FORMS_KEY ?? '';
