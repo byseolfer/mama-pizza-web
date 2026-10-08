@@ -162,3 +162,40 @@ test('info: opciones de pago y servicios', () => {
   for (const s of ['En efectivo', 'VISA']) assert.ok(doc.querySelector('#payment').text.includes(s));
   for (const s of ['Aire acondicionado', 'Para llevar']) assert.ok(doc.querySelector('#services').text.includes(s));
 });
+
+// ---------- Todo de un vistazo + formulario ----------
+import { renderContacto } from '../src/templates/contacto.mjs';
+const contactoDoc = (formKey) => parse(renderContacto({ ...ctx(), formKey }));
+
+test('contacto: H2 "Todo / de un vistazo" y los tres datos con su H3', () => {
+  const doc = contactoDoc();
+  assert.equal(doc.querySelector('section').getAttribute('id'), 'contact');
+  assert.deepEqual(doc.querySelectorAll('h2 > span').map((s) => s.text), ['Todo', 'de un vistazo']);
+  const h3 = doc.querySelectorAll('h3').map((h) => h.text.trim());
+  for (const t of ['Encuéntrenos', 'Envíenos un correo electrónico', 'Llámenos', 'Envíenos su mensaje']) assert.ok(h3.includes(t), t);
+  assert.ok(doc.querySelector('a[href="mailto:mamapizza6@gmail.com"]'));
+  assert.ok(doc.querySelector('a[href="tel:+34917954422"]'));
+});
+
+test('contacto: etiquetas literales unidas a su campo', () => {
+  const doc = contactoDoc();
+  const labels = doc.querySelectorAll('form label');
+  assert.deepEqual(labels.map((l) => l.text.trim()), ['Su nombre', 'Su correo electrónico', 'su teléfono', 'Asunto', 'Su mensaje']);
+  for (const l of labels) assert.ok(doc.querySelector(`#${l.getAttribute('for')}`), l.getAttribute('for'));
+  assert.equal(doc.querySelector('form button[type="submit"]').text.trim(), 'Enviar');
+  assert.ok(doc.querySelector('input[name="botcheck"]'));
+});
+
+test('contacto: los mensajes de error, éxito y fallo son literales', () => {
+  const html = renderContacto({ ...ctx(), formKey: 'k' });
+  for (const t of ['Introduzca su nombre.', 'Introduzca una dirección de correo electrónico válida', 'Su mensaje ha sido enviado.',
+    'Le contestaremos a la mayor brevedad.', 'Fallo en el envío del mensaje']) assert.ok(html.includes(t), t);
+});
+
+test('contacto: sin clave el formulario usa mailto; con clave, Web3Forms', () => {
+  assert.equal(contactoDoc().querySelector('form').getAttribute('action'), 'mailto:mamapizza6@gmail.com');
+  const f = contactoDoc('CLAVE').querySelector('form');
+  assert.equal(f.getAttribute('action'), 'https://api.web3forms.com/submit');
+  assert.equal(f.getAttribute('method'), 'POST');
+  assert.equal(f.querySelector('input[name="access_key"]').getAttribute('value'), 'CLAVE');
+});
