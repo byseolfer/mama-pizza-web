@@ -15,7 +15,7 @@ export function pageShell({ lang, t, siteUrl, body, site, carta }) {
   const img = `${siteUrl}/assets/og.jpg`;
   const alternates = LANGS.map((l) => `<link rel="alternate" hreflang="${l}" href="${siteUrl}${langPath(l)}">`).join('\n')
     + `\n<link rel="alternate" hreflang="x-default" href="${siteUrl}/">`;
-  const heroSet = [480, 960, 1600].map((w) => `/assets/img/pizza-${w}.avif ${w}w`).join(', ');
+  const heroSet = [480, 960, 1600].map((w) => `/assets/img/hero-${w}.avif ${w}w`).join(', ');
   return `<!doctype html>
 <html lang="${lang}">
 <head>

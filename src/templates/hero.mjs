@@ -22,7 +22,7 @@ export function renderHero({ t, site, carta }) {
   const links = navItems(t).map(([h, l]) => `<li><a href="${h}">${esc(l)}</a></li>`).join('');
   const offers = [site.offers.lj.p, site.offers.fs.p, site.offers.lj.h4].map((o) => `<span>${esc(o)}</span>`).join('');
   return `<header id="home" class="hero">
-${picture('pizza', 'Pizza recién horneada con tomate cherry, aceitunas negras y albahaca en MAMA PIZZA, pizzería en Villaverde, Madrid', { cls: 'hero-bg', priority: true })}
+${picture('hero', 'Pizza recién horneada con tomate cherry y albahaca sobre una tabla de madera rústica en MAMA PIZZA, pizzería en Villaverde, Madrid', { cls: 'hero-bg', priority: true })}
 <nav class="nav" aria-label="${esc(t('nav.menu'))}">
 <a class="logo" href="#home">${SLICE}<span>${esc(site.name)}</span></a>
 <ul class="nav-links">${links}</ul>

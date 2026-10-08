@@ -14,7 +14,7 @@ before(async () => {
   await buildIcons({ outDir: dist });
 }, { timeout: 60_000 });
 
-const PHOTOS = ['pizza', 'calientes', 'frios', 'hamburguesas', 'perritos', 'ensaladas', 'sandwiches'];
+const PHOTOS = ['pizza', 'hero', 'calientes', 'frios', 'hamburguesas', 'perritos', 'ensaladas', 'sandwiches'];
 
 test('cada foto tiene sus 3 anchos en AVIF y WebP', () => {
   for (const name of PHOTOS) for (const w of [480, 960, 1600]) for (const ext of ['avif', 'webp']) {

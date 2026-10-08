@@ -22,6 +22,14 @@ test('hero: un único H1 "MAMA PIZZA" antes del H2 "Bienvenido"', () => {
   assert.equal(doc.querySelector('header').getAttribute('id'), 'home');
 });
 
+test('hero: usa la foto dedicada hero-*, no la foto compartida de la carta', () => {
+  const doc = parse(renderHero(ctx()));
+  const img = doc.querySelector('.hero-bg img');
+  assert.match(img.getAttribute('src'), /\/assets\/img\/hero-960\.webp$/);
+  const avifSrcset = doc.querySelector('.hero-bg source[type="image/avif"]').getAttribute('srcset');
+  assert.match(avifSrcset, /\/assets\/img\/hero-480\.avif/);
+});
+
 test('hero: la navegación enlaza a las secciones de la web actual', () => {
   const hrefs = parse(renderHero(ctx())).querySelectorAll('.nav-links a').map((a) => a.getAttribute('href'));
   for (const h of ['#menu', '#map', '#times', '#aboutUs', '#contact']) assert.ok(hrefs.includes(h), h);

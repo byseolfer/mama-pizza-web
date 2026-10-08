@@ -5,7 +5,7 @@ import sharp from 'sharp';
 import { existsSync, mkdirSync, copyFileSync } from 'node:fs';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-const PHOTOS = ['pizza', 'calientes', 'frios', 'hamburguesas', 'perritos', 'ensaladas', 'sandwiches'];
+const PHOTOS = ['pizza', 'hero', 'calientes', 'frios', 'hamburguesas', 'perritos', 'ensaladas', 'sandwiches'];
 const PHOTO_WIDTHS = [480, 960, 1600];
 const MAP_WIDTHS = [640, 1200];
 // Tesela 16/{x}/{y}: cubre el negocio (Calle Parvillas Altas 6). Punto en el píxel (261,352) de un
@@ -34,7 +34,7 @@ async function photos(srcDir, outDir) {
 
 async function ogImage(srcDir, outDir) {
   mkdirSync(fileURLToPath(outDir), { recursive: true });
-  const base = await sharp(fileURLToPath(new URL('pizza.jpg', srcDir)))
+  const base = await sharp(fileURLToPath(new URL('hero.jpg', srcDir)))
     .resize(1200, 630, { fit: 'cover', position: sharp.strategy.attention })
     .modulate({ brightness: 0.82 })
     .toBuffer();
