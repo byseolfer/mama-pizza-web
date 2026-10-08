@@ -199,3 +199,58 @@ test('contacto: sin clave el formulario usa mailto; con clave, Web3Forms', () =>
   assert.equal(f.getAttribute('method'), 'POST');
   assert.equal(f.querySelector('input[name="access_key"]').getAttribute('value'), 'CLAVE');
 });
+
+// ---------- Pie en ticket, aviso legal, cookies e idioma ----------
+import { renderFooter } from '../src/templates/footer.mjs';
+const footDoc = (lang = 'es') => parse(renderFooter(ctx(lang)));
+
+test('pie: H2 MAMA PIZZA y navegación con los 8 enlaces literales', () => {
+  const doc = footDoc();
+  assert.equal(doc.querySelectorAll('h2').some((h) => h.text.trim() === 'MAMA PIZZA'), true);
+  const hrefs = doc.querySelectorAll('footer nav a').map((a) => a.getAttribute('href'));
+  for (const h of ['#menu', '#map', '#times', '#payment', '#aboutUs', '#services', '#contact', '#reservation']) {
+    assert.ok(hrefs.includes(h), h);
+  }
+});
+
+test('pie: tripAdvisor y facebook con sus URLs y aria-label', () => {
+  const doc = footDoc();
+  const tripadvisor = doc.querySelector('a[aria-label="tripAdvisor"]');
+  const facebook = doc.querySelector('a[aria-label="facebook"]');
+  assert.equal(tripadvisor.getAttribute('href'), site.social.tripadvisor);
+  assert.equal(facebook.getAttribute('href'), site.social.facebook);
+});
+
+test('pie: el aviso legal tiene las 14 parejas literales', () => {
+  const doc = footDoc();
+  const dt = doc.querySelectorAll('.legal-modal dt').map((d) => d.text.trim());
+  const dd = doc.querySelectorAll('.legal-modal dd').map((d) => d.text.trim());
+  assert.deepEqual(dt, site.legal.map((l) => l[0]));
+  assert.deepEqual(dd, site.legal.map((l) => l[1]));
+  assert.ok(dd.includes('SEGOVIA BLANCO'));
+  assert.ok(dd.includes('B80102528'));
+});
+
+test('pie: política de privacidad y cookies', () => {
+  const doc = footDoc();
+  assert.ok(doc.querySelector('a[href]').getAttribute('href'));
+  const privacy = doc.querySelectorAll('a').find((a) => a.text.trim() === 'Política de privacidad');
+  assert.equal(privacy.getAttribute('href'), site.privacyUrl);
+  const cookiesBtn = doc.querySelectorAll('button').find((b) => b.text.trim() === 'Cambiar configuración de cookies');
+  assert.ok(cookiesBtn);
+});
+
+test('pie: selector de 16 idiomas con el actual seleccionado', () => {
+  const doc = footDoc('de');
+  const opts = doc.querySelectorAll('select option');
+  assert.equal(opts.length, 16);
+  const selected = opts.find((o) => o.hasAttribute('selected'));
+  assert.equal(selected.getAttribute('value'), '/de/');
+  assert.equal(selected.text.trim(), 'Deutsch');
+});
+
+test('pie: copyright nuevo y sin el crédito de DISH', () => {
+  const html = renderFooter(ctx());
+  assert.ok(html.includes('© 2026 MAMA PIZZA'));
+  assert.ok(!html.includes('DISH'));
+});

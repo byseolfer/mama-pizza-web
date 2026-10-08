@@ -1,0 +1,72 @@
+/* Pie en ticket de caja + aviso legal + aviso de cookies (propuestas/05-contacto-pie.html, combinación c23). */
+.site-foot { padding-top: 8px; }
+.ticketwrap { padding: 36px 16px 48px; background: rgba(14, 11, 9, .55); border-top: 1px solid var(--line); display: flex; justify-content: center; }
+.ticket {
+  width: 100%; max-width: 380px; background: #FBF8F2; color: var(--paper-ink); font-family: var(--font); font-stretch: 85%;
+  padding: 26px 22px 30px; position: relative; box-shadow: 0 30px 50px -20px rgba(0, 0, 0, .8);
+  -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 16px 51% repeat-x,
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / 16px 51% repeat-x;
+  mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 16px 51% repeat-x,
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top / 16px 51% repeat-x;
+}
+.ticket .tw { text-align: center; font-weight: 900; font-stretch: 125%; font-size: 30px; letter-spacing: -.01em; line-height: 1; }
+.ticket .ts { text-align: center; font-size: 12.5px; margin-top: 6px; line-height: 1.4; }
+.ticket hr { border: 0; border-top: 1.5px dashed rgba(38, 33, 28, .4); margin: 14px 0; }
+.ticket .ln { display: flex; justify-content: space-between; gap: 10px; font-size: 13.5px; padding: 3px 0; text-decoration: none; min-height: 28px; align-items: center; }
+.ticket .ln span:last-child { text-align: right; }
+.ticket .grp { font-size: 11px; font-weight: 700; letter-spacing: .12em; color: var(--paper-mute); margin-bottom: 4px; }
+.ticket nav { display: grid; }
+.ticket nav a { display: flex; justify-content: space-between; align-items: center; text-decoration: none; font-size: 13.5px; padding: 6px 0; min-height: 36px; }
+.ticket nav a::after { content: "→"; color: var(--paper-mute); }
+.ticket .soc { display: flex; justify-content: center; gap: 10px; margin-top: 6px; }
+.ticket .soc a { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; border: 1.5px solid rgba(38, 33, 28, .3); color: var(--paper-ink); }
+.ticket .soc .i { width: 18px; height: 18px; }
+.ticket .lg { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; font-size: 12px; }
+.ticket .lg button, .ticket .lg a { min-height: 36px; display: inline-flex; align-items: center; text-decoration: underline; text-underline-offset: 2px; color: var(--paper-mute); }
+.ticket .lang { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 13.5px; }
+.ticket .lang select { font: inherit; font-size: 14px; color: var(--paper-ink); background: transparent; border: 1.5px solid rgba(38, 33, 28, .3); border-radius: 8px; min-height: 40px; padding: 0 8px; }
+.ticket .bar { height: 42px; margin: 14px auto 4px; width: 80%; background: repeating-linear-gradient(90deg, var(--paper-ink) 0 2px, transparent 2px 4px, var(--paper-ink) 4px 5px, transparent 5px 8px, var(--paper-ink) 8px 11px, transparent 11px 12px); }
+.ticket .thx { text-align: center; font-weight: 800; font-size: 13px; letter-spacing: .06em; }
+
+/* <details> nativo: visible y funcional sin JavaScript (se expande en el flujo de la página). */
+.legal-details { max-width: 1200px; margin: 0 auto; padding: 0 var(--gutter); color: var(--mute); font-size: 13px; }
+.legal-details summary { display: inline-flex; min-height: 36px; align-items: center; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; list-style: none; }
+.legal-details summary::-webkit-details-marker { display: none; }
+.legal-details .x { display: none; } /* solo se muestra cuando JS lo convierte en diálogo flotante */
+.legal-modal { padding: 16px 0 28px; color: var(--ink); }
+.legal-modal .h3 { font-size: 20px; color: var(--soft); }
+.legal-modal dl { display: grid; gap: 2px 16px; font-size: 14px; margin-top: 12px; }
+@media (min-width: 540px) { .legal-modal dl { grid-template-columns: auto 1fr; } }
+.legal-modal dt { color: var(--mute); font-size: 12.5px; margin-top: 10px; }
+@media (min-width: 540px) { .legal-modal dt { margin-top: 0; } }
+.legal-modal dd { font-weight: 600; }
+
+/* Con JavaScript, legal.js añade esta clase: el <details> se convierte en diálogo centrado. */
+.legal-details.as-dialog {
+  position: fixed; inset: 0; z-index: 50; max-width: none; padding: 0; display: flex; align-items: flex-end; justify-content: center;
+  background: rgba(10, 8, 6, .6);
+}
+@media (min-width: 760px) { .legal-details.as-dialog { align-items: center; } }
+.legal-details.as-dialog summary { display: none; }
+.legal-details.as-dialog .legal-modal {
+  position: relative; width: 100%; max-width: 520px; max-height: 85svh; overflow: auto; border-radius: 22px 22px 0 0; padding: 22px 20px;
+  background: var(--paper); color: var(--paper-ink);
+}
+@media (min-width: 760px) { .legal-details.as-dialog .legal-modal { border-radius: 18px; } }
+.legal-details.as-dialog .legal-modal .h3 { color: var(--red-paper); padding-right: 40px; }
+.legal-details.as-dialog .legal-modal dt { color: var(--paper-mute); }
+.legal-details.as-dialog .x { display: grid; position: absolute; right: 14px; top: 14px; width: 40px; height: 40px; border-radius: 50%; background: rgba(38, 33, 28, .08); place-items: center; }
+
+.cookies-note { position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 50; display: flex; justify-content: center; }
+.cookies-note[hidden] { display: none; }
+.cookies-note .box {
+  max-width: 480px; background: var(--paper); color: var(--paper-ink); border-radius: 16px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  box-shadow: 0 20px 40px -16px rgba(0, 0, 0, .6);
+}
+.cookies-note p { font-size: 13.5px; flex: 1; min-width: 180px; }
+.cookies-note button { font-size: 13px; font-weight: 700; text-decoration: underline; min-height: 36px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .legal-dialog:not([hidden]) .legal-modal, .cookies-note:not([hidden]) .box { animation: up .4s var(--ease); }
+  @keyframes up { from { transform: translateY(24px); opacity: 0; } }
+}
