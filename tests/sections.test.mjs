@@ -103,3 +103,62 @@ test('carta: las franjas con foto de stock tienen texto alternativo local', () =
   assert.equal(bans.length, 6);
   for (const b of bans) assert.match(b.getAttribute('aria-label'), /en MAMA PIZZA, Villaverde \(Madrid\)$/);
 });
+
+// ---------- Ofertas, horarios, mapa, reserva, pago y servicios ----------
+import { renderInfo } from '../src/templates/info.mjs';
+const infoDoc = (lang = 'es') => parse(renderInfo(ctx(lang)));
+const clean = (s) => s.replace(/\s+/g, ' ').trim();
+
+test('info: existen los anclajes de la web actual', () => {
+  const doc = infoDoc();
+  for (const id of ['aboutUs', 'times', 'map', 'reservation', 'payment', 'services']) assert.ok(doc.querySelector(`#${id}`), id);
+});
+
+test('info: los dos cupones con H3, H4 y texto literal', () => {
+  const doc = infoDoc();
+  for (const o of [site.offers.lj, site.offers.fs]) {
+    const h3 = doc.querySelectorAll('h3').find((h) => h.text.trim() === o.h3);
+    assert.ok(h3, o.h3);
+    const card = h3.parentNode;
+    assert.equal(card.querySelector('h4').text.trim(), 'Todas las ofertas son para llevar');
+    assert.equal(card.querySelector('p').text.trim(), o.p);
+  }
+});
+
+test('info: horario con 7 días, martes "cerrado" y placa en vivo', () => {
+  const doc = infoDoc();
+  assert.deepEqual(doc.querySelectorAll('#times h2 > span').map((s) => s.text), ['Nuestros', 'horarios de apertura']);
+  const rows = doc.querySelectorAll('#times .hours li');
+  assert.equal(rows.length, 7);
+  assert.equal(clean(rows[1].text), 'Martes cerrado');
+  assert.equal(clean(rows[0].text), 'Lunes 18:00 – 23:00');
+  assert.ok(doc.querySelector('#times [data-live]'));
+});
+
+test('info: horario en formato de 12 h en inglés', () => {
+  assert.equal(clean(infoDoc('en').querySelectorAll('#times .hours li')[0].text), 'Monday 06:00 PM – 11:00 PM');
+});
+
+test('info: "Mostrar mapa" es un enlace a Google Maps con el aviso de privacidad', () => {
+  const doc = infoDoc();
+  const a = doc.querySelector('#map a[data-consent]');
+  assert.ok(a.getAttribute('href').startsWith('https://www.google.com/maps'));
+  assert.equal(a.text.trim(), 'Mostrar mapa');
+  assert.ok(doc.querySelector('#map').text.includes('Su dirección IP se enviará a Google Maps.'));
+  assert.ok(doc.querySelector('#map').text.includes(site.address.full));
+});
+
+test('info: reserva con textos literales', () => {
+  const doc = infoDoc();
+  const res = doc.querySelector('#reservation');
+  assert.deepEqual(res.querySelectorAll('h2 > span').map((s) => s.text), ['Haz tu', 'reserva']);
+  assert.ok(res.querySelector('h4').text.includes('Llámanos al 917954422'));
+  assert.ok(res.text.includes('LLÁMANOS Y RESERVA TU PEDIDO PARA LA HORA QUE QUIERAS'));
+});
+
+test('info: opciones de pago y servicios', () => {
+  const doc = infoDoc();
+  assert.ok(clean(doc.querySelector('#payment').text).includes('Disponible opciones de pago'));
+  for (const s of ['En efectivo', 'VISA']) assert.ok(doc.querySelector('#payment').text.includes(s));
+  for (const s of ['Aire acondicionado', 'Para llevar']) assert.ok(doc.querySelector('#services').text.includes(s));
+});
