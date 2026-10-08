@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mama Pizza · Variaciones de la pizarra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Karla:wght@400;500;700&family=Bricolage+Grotesque:opsz,wght@12..96,800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<style>
+  /* ---------- Shell ---------- */
+  :root{--shell-bg:#F3F3F1;--shell-ink:#1D1F1C;--shell-mute:#5E625C;--shell-line:#DADBD6;--tomato:#E0412F}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--shell-bg);color:var(--shell-ink);font-family:"Karla",system-ui,sans-serif;line-height:1.5}
+  .shell{max-width:1320px;margin:0 auto;padding:40px 24px 120px}
+  .shell-head h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:clamp(28px,4vw,44px);letter-spacing:-.02em;line-height:1.05}
+  .shell-head p{color:var(--shell-mute);max-width:72ch;margin-top:10px}
+  .opt{margin-top:72px}
+  .opt-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;border-top:2px solid var(--shell-ink);padding-top:16px}
+  .opt-num{font-family:"Bricolage Grotesque";font-weight:800;font-size:56px;line-height:.9;color:var(--tomato)}
+  .opt-title{font-family:"Bricolage Grotesque";font-weight:800;font-size:28px;letter-spacing:-.01em}
+  .opt-desc{flex-basis:100%;color:var(--shell-mute);max-width:80ch}
+  .stage{display:grid;grid-template-columns:1fr;gap:24px;margin-top:20px;align-items:start}
+  @media (min-width:1100px){.stage{grid-template-columns:375px minmax(0,1fr)}}
+  .frame-label{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--shell-mute);margin-bottom:8px;display:flex;gap:6px;align-items:center}
+  .frame{container-type:inline-size;position:relative;overflow-y:auto;overflow-x:hidden;border-radius:14px;background:#121310;box-shadow:0 18px 50px -20px rgba(30,40,30,.35);scrollbar-width:thin;scrollbar-color:#3a3b36 transparent}
+  .frame.desk{height:760px}
+  .frame.phone{width:375px;height:760px;border-radius:40px;border:10px solid #1D1F1C;scrollbar-width:none;margin:0 auto}
+  .frame.phone::-webkit-scrollbar{display:none}
+  .shell-note{margin-top:40px;padding:20px;border-radius:14px;background:#fff;border:1px solid var(--shell-line);font-size:15px}
+  .shell-note li{margin-left:18px;margin-top:4px}
+
+  /* ---------- Base de la carta (tema Cinemático nocturno) ---------- */
+  .carta{--night:#121310;--s1:#1A1B18;--s2:#24251F;--line:rgba(246,243,238,.1);--ink:#F6F3EE;--mute:#ABA8A0;--red:#E0412F;--green:#3E9B6A;--accent-soft:#F2B8A8;
+    background:var(--night);color:var(--ink);font-family:"Archivo",sans-serif;min-height:100%;font-size:15px}
+  .carta button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  .carta .ph{line-height:1}
+  .mh{padding:28px 20px 18px;position:relative}
+  @container (min-width:760px){.mh{padding:44px 48px 24px}}
+  .mh .kick{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:14px;color:var(--accent-soft)}
+  .mh .kick::before{content:"";width:28px;height:2px;background:var(--red)}
+  .mh h2{font-weight:900;font-stretch:125%;text-transform:uppercase;font-size:clamp(38px,11cqi,84px);line-height:.88;letter-spacing:-.02em;margin-top:8px}
+  .pdfs{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;font-size:13px;color:var(--mute);align-items:center}
+  .pdfs a{display:inline-flex;align-items:center;gap:6px;color:var(--ink);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px;min-height:34px;background:rgba(18,19,16,.35)}
+  .pdfs a:hover{border-color:var(--ink)}
+  .eur{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+  .offer{margin:0 20px 8px;border-radius:18px;background:var(--red);color:#fff;padding:16px 18px;display:grid;gap:4px;position:relative}
+  @container (min-width:760px){.offer{margin:0 48px 8px}}
+  .offer b{font-weight:900;font-stretch:115%;text-transform:uppercase;font-size:13px;letter-spacing:.04em;opacity:.85}
+  .offer p{font-size:15px;line-height:1.4}
+  .offer p strong{font-weight:800}
+
+  /* ---------- Pizarra (05) ---------- */
+  .board{padding:4px 20px 90px}
+  @container (min-width:760px){.board{padding:4px 48px 90px;columns:2;column-gap:56px}}
+  .board section{break-inside:avoid;padding-top:30px}
+  .board h3{font-weight:900;font-stretch:125%;text-transform:uppercase;font-size:26px;line-height:.95;letter-spacing:-.01em}
+  .board h3 small{display:block;font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--red);margin-top:6px;font-stretch:100%}
+  .board .note{font-size:14px;color:var(--mute);font-style:italic;margin-top:6px}
+  .board .colh{display:flex;justify-content:flex-end;margin-top:12px;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--mute)}
+  .board .colh span{width:64px;text-align:right}
+  .board ul{list-style:none;margin-top:8px}
+  .board li{padding:7px 0}
+  .board .ln{display:flex;align-items:baseline;gap:8px;font-size:14.5px}
+  .board .ln .n{font-weight:700}
+  .board .ln .dots{flex:1;min-width:16px;border-bottom:2px dotted rgba(246,243,238,.22);transform:translateY(-4px)}
+  .board .ln .eur{width:64px;text-align:right;flex:none}
+  .board .ln .eur.one{width:auto}
+  .board .d{font-size:13px;color:var(--mute);margin-top:2px;max-width:42ch}
+  .board li.sup .n{font-weight:500;color:var(--mute)}
+  .board .ingl p{font-size:14px;margin-top:8px;line-height:1.55}
+  .board .ingl p b{font-size:12px;letter-spacing:.06em;color:var(--mute);font-weight:600;display:block}
+  .dock{position:sticky;bottom:0;height:0;z-index:6}
+  .carta .fab{position:absolute;right:16px;bottom:16px;display:inline-flex;align-items:center;gap:8px;min-height:50px;padding:0 20px;border-radius:999px;background:var(--red);color:#fff!important;font-weight:700;box-shadow:0 14px 30px -10px rgba(224,65,47,.6)}
+  .scrim{position:absolute;left:0;right:0;bottom:0;height:9999px;background:rgba(10,10,9,.55);opacity:0;pointer-events:none;transition:opacity .3s}
+  .sheet{position:absolute;left:0;right:0;bottom:0;background:#1A1B18;color:#F6F3EE;border-radius:26px 26px 0 0;border-top:1px solid rgba(246,243,238,.1);padding:10px 16px 84px;transform:translateY(105%);transition:transform .45s cubic-bezier(.16,1,.3,1)}
+  @container (min-width:760px){.sheet{left:auto;right:16px;bottom:76px;width:320px;padding:14px 16px 16px;border-radius:22px;border:1px solid rgba(246,243,238,.1);transform:translateY(12px) scale(.98);opacity:0;pointer-events:none;transition:transform .3s cubic-bezier(.16,1,.3,1),opacity .2s}}
+  .dock.open .scrim{opacity:1;pointer-events:auto}
+  .dock.open .sheet{transform:none;opacity:1;pointer-events:auto}
+  .grab{width:40px;height:4px;border-radius:4px;background:rgba(246,243,238,.25);margin:0 auto 12px}
+  @container (min-width:760px){.grab{display:none}}
+  .sheet b{display:block;font-weight:900;font-stretch:115%;text-transform:uppercase;font-size:14px;color:#ABA8A0;margin:0 4px 8px}
+  .sheet nav{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .sheet nav button{min-height:48px;text-align:left;padding:0 14px;border-radius:14px;background:#24251F;font-weight:600;font-size:14px;display:flex;align-items:center;gap:8px}
+  .sheet nav button:active{background:var(--red)}
+  @media (prefers-reduced-motion:reduce){.carta *,.carta *::before,.carta *::after{transition:none!important;animation:none!important}}
+
+  /* =========================================================
+     V1 · CON FOTOS
+     ========================================================= */
+  .v1 .mh{padding-top:0}
+  .v1 .cover{height:150px;margin:0 -20px 22px;background:url(assets/pizza.jpg) 70% 40%/cover;position:relative}
+  @container (min-width:760px){.v1 .cover{height:220px;margin:0 -48px 28px}}
+  .v1 .cover::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,19,16,.15),#121310)}
+  .v1 .ban{height:118px;border-radius:18px;background-image:url(assets/pizza.jpg);background-repeat:no-repeat;position:relative;overflow:hidden}
+  .v1 .ban::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,19,16,0) 20%,rgba(18,19,16,.92))}
+  .v1 h3{position:relative;z-index:1;margin-top:-42px;padding:0 14px 10px}
+  .v1 h3 small{color:var(--accent-soft)}
+  .v1 .note,.v1 .colh{padding:0 2px}
+  .v1 .thumb{width:44px;height:44px;border-radius:50%;flex:none;background-image:url(assets/pizza.jpg);background-size:520%;border:2px solid rgba(246,243,238,.15);align-self:center}
+  .v1 li.has-thumb{display:flex;gap:12px;align-items:flex-start}
+  .v1 li.has-thumb>div{flex:1;min-width:0}
+
+  /* =========================================================
+     V2 · MANTEL VICHY
+     ========================================================= */
+  .v2{--g:#132E1F;--r:#2B1411}
+  .v2 .tablecloth{height:18px;background:repeating-conic-gradient(var(--red) 0 25%,#F6F3EE 0 50%) 0 0/18px 18px;opacity:.9}
+  .v2 .offer{background:var(--red);box-shadow:0 0 0 4px var(--night),0 0 0 6px rgba(246,243,238,.25)}
+  .v2 .offer::before{content:"";position:absolute;inset:8px;border:1.5px dashed rgba(255,255,255,.45);border-radius:12px;pointer-events:none}
+  .v2 .board section{margin-top:14px;padding:22px 18px 16px;border-radius:22px;position:relative;isolation:isolate;overflow:hidden}
+  .v2 .board section::before{content:"";position:absolute;inset:0;z-index:-1;background:repeating-conic-gradient(rgba(246,243,238,.045) 0 25%,transparent 0 50%) 0 0/24px 24px}
+  .v2 .board section:nth-child(3n+1){background:var(--g)}
+  .v2 .board section:nth-child(3n+2){background:var(--r)}
+  .v2 .board section:nth-child(3n){background:var(--s1);box-shadow:inset 0 0 0 1px rgba(246,243,238,.12)}
+  .v2 .board section:nth-child(3n+1) h3 small{color:#8FD3AE}
+  .v2 .board section:nth-child(3n+2) h3 small{color:#FFB4A4}
+  .v2 .board h3{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .v2 .board h3::before{content:"";width:22px;height:22px;flex:none;border-radius:6px;background:repeating-conic-gradient(var(--red) 0 25%,#F6F3EE 0 50%) 0 0/11px 11px}
+  .v2 .board h3 small{flex-basis:100%;margin-top:0}
+  .v2 .board .ln .dots{border-bottom:1.5px dashed rgba(246,243,238,.25)}
+  .v2 .board li+li{border-top:1px solid rgba(246,243,238,.06)}
+  .v2 .board .d,.v2 .board .note{color:rgba(246,243,238,.68)}
+
+  /* =========================================================
+     V3 · ICONOS
+     ========================================================= */
+  .v3{--q:#F2C14E;--c:#E0412F;--p:#5AA9E6;--v:#3E9B6A;--o:#C98A5B}
+  .v3 .board h3{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .v3 .board h3 small{flex-basis:100%;margin:0 0 0 56px}
+  .v3 .ico{width:44px;height:44px;flex:none;border-radius:14px;display:grid;place-items:center;font-size:24px;background:var(--red);color:#fff;transform:rotate(-4deg)}
+  .v3 .board section:nth-child(even) .ico{background:var(--green);transform:rotate(4deg)}
+  .v3 .board .note{margin-left:56px}
+  .v3 .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+  .v3 .tag{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:3px 9px 3px 7px;border-radius:999px;background:color-mix(in srgb,var(--k) 16%,transparent);color:color-mix(in srgb,var(--k) 70%,#fff);border:1px solid color-mix(in srgb,var(--k) 35%,transparent)}
+  .v3 .tag i{font-size:13px}
+  .v3 .flag{display:inline-flex;vertical-align:-2px;margin-left:6px;font-size:15px}
+  .v3 .flag.leaf{color:var(--v)}.v3 .flag.fish{color:var(--p)}
+  .v3 .ingl .grp{margin-top:12px}
+  .v3 .ingl .grp b{display:flex;align-items:center;gap:6px;font-size:12px;letter-spacing:.06em;color:var(--mute);font-weight:600}
+  .v3 .ingl .grp .tags{margin-top:6px}
+  .v3 .legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin:0 20px 6px;font-size:12.5px;color:var(--mute)}
+  @container (min-width:760px){.v3 .legend{margin:0 48px 6px}}
+  .v3 .legend span{display:inline-flex;align-items:center;gap:6px}
+
+  /* =========================================================
+     V4 · LUZ DE HORNO
+     ========================================================= */
+  .v4{position:relative;isolation:isolate;
+    background:radial-gradient(120% 55% at 50% -8%,rgba(232,104,46,.42),transparent 62%),radial-gradient(70% 35% at 110% 38%,rgba(224,65,47,.16),transparent 70%),radial-gradient(70% 30% at -10% 75%,rgba(232,140,60,.12),transparent 70%),var(--night)}
+  .v4::after{content:"";position:absolute;inset:0;z-index:5;pointer-events:none;opacity:.12;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .v4 .mh .kick{color:#F7C59F}
+  .v4 .offer{background:linear-gradient(135deg,#E0412F,#E8682E)}
+  .v4 .board section{position:relative;isolation:isolate;padding-top:46px}
+  .v4 .board section::before{content:"";position:absolute;left:0;right:0;top:18px;height:1px;background:linear-gradient(90deg,rgba(232,104,46,.8),rgba(232,104,46,0))}
+  .v4 .board h3{position:relative}
+  .v4 .board h3::after{content:attr(data-wm);position:absolute;z-index:-1;left:-6px;top:-30px;font-size:74px;font-weight:900;font-stretch:125%;line-height:1;white-space:nowrap;color:transparent;-webkit-text-stroke:1px rgba(247,197,159,.13);pointer-events:none}
+  .v4 .board section{overflow:hidden}
+  .v4 .board h3 small{color:#F7A06F}
+  .v4 .board .ln .eur{color:#FBE3D0}
+  .v4 .board .ln .dots{border-bottom-color:rgba(247,197,159,.25)}
+  @media (prefers-reduced-motion:no-preference){.v4 .glow{position:absolute;left:50%;top:-120px;width:420px;height:260px;margin-left:-210px;border-radius:50%;background:rgba(240,120,50,.28);filter:blur(60px);z-index:-1;animation:flick 5s ease-in-out infinite}@keyframes flick{50%{opacity:.6;transform:scale(1.08)}}}
+
+  /* =========================================================
+     V5 · CARTA DE PAPEL SOBRE MADERA
+     ========================================================= */
+  .v5{background:linear-gradient(180deg,rgba(16,12,9,.5),rgba(16,12,9,.78)),url(assets/pizza.jpg) 6% 50%/cover no-repeat}
+  .v5 .offer{box-shadow:0 18px 40px -16px rgba(0,0,0,.6)}
+  .v5 .board{--ink:#26211C;--mute:#6B645A;--paper:#F2ECE0;background:var(--paper);color:var(--ink);margin:18px 12px 0;padding:34px 20px 100px;border-radius:6px 6px 0 0;position:relative;box-shadow:0 30px 60px -20px rgba(0,0,0,.75);
+    -webkit-mask:radial-gradient(circle 6px at 50% 0,transparent 97%,#000) 0 0/18px 100%;mask:radial-gradient(circle 6px at 50% 0,transparent 97%,#000) 0 0/18px 100%}
+  @container (min-width:760px){.v5 .board{margin:24px 32px 0;padding:44px 40px 100px}}
+  .v5 .board::before{content:"";position:absolute;left:0;right:0;top:0;height:12px;background:repeating-conic-gradient(#C8321F 0 25%,var(--paper) 0 50%) 0 0/12px 12px;opacity:.85}
+  .v5 .stamp{display:flex;align-items:center;justify-content:center;gap:10px;font-weight:900;font-stretch:125%;text-transform:uppercase;font-size:13px;letter-spacing:.18em;color:#C8321F;padding-bottom:6px;column-span:all}
+  .v5 .stamp::before,.v5 .stamp::after{content:"";flex:1;max-width:80px;height:1px;background:rgba(38,33,28,.3)}
+  .v5 .board h3{color:#C8321F}
+  .v5 .board h3 small{color:#1E6B45}
+  .v5 .board .note,.v5 .board .d,.v5 .board .colh,.v5 .board li.sup .n,.v5 .board .ingl p b{color:var(--mute)}
+  .v5 .board .ln .dots{border-bottom-color:rgba(38,33,28,.35)}
+  .v5 .board .ln .eur{color:var(--ink)}
+  /* =========================================================
+     COMBINACIÓN 05 + 01 · PAPEL SOBRE MADERA CON FOTOS
+     ========================================================= */
+  .v15 .cover::after{background:linear-gradient(180deg,rgba(16,12,9,0) 30%,rgba(16,12,9,.7))}
+  .v15 .board section{padding-top:26px}
+  .v15 .board .ban{border-radius:10px;height:124px;box-shadow:0 10px 24px -14px rgba(38,33,28,.6)}
+  .v15 .board .ban::after{background:linear-gradient(180deg,rgba(20,14,10,0) 15%,rgba(20,14,10,.88))}
+  .v15 .board h3{color:#FBF7F0;margin-top:-46px;padding:0 14px 12px}
+  .v15 .board h3 small{color:#F6CDB4}
+  .v15 .board .note{margin-top:10px}
+  .v15 .board .thumb{border:2px solid #fff;box-shadow:0 4px 10px -4px rgba(38,33,28,.5)}
+  .v15 .stamp{padding-bottom:2px}
+  @container (max-width:759px){
+    .v15 .board li.has-thumb{gap:10px}
+    .v15 .board .thumb{width:36px;height:36px}
+    .v15 .board .colh span,.v15 .board .ln .eur{width:56px}
+    .v15 .board .ln .dots{min-width:10px}
+    .v15 .board .colh{font-size:10px;letter-spacing:.03em}
+  }
+  .board .ln .n{min-width:0;overflow-wrap:anywhere}
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <header class="shell-head">
+    <h1>Componente 2 · Carta: variaciones de la Pizarra</h1>
+    <p>Misma carta y mismo funcionamiento que la 05 elegida (puntos guía, columnas Mediana / Familiar y botón "Carta" con índice), con cinco formas distintas de darle más vida que el fondo negro liso. Pulsa el botón rojo "Carta" para probar el índice.</p>
+  </header>
+
+  <section class="opt" data-v="v15">
+    <div class="opt-head"><span class="opt-num" style="font-size:44px">05 + 01</span><span class="opt-title">Papel sobre madera con fotos</span>
+      <p class="opt-desc">Tu combinación: la carta impresa en papel crema sobre la madera (05), con la foto de portada, una franja de foto con el título de cada categoría y las miniaturas redondas en las pizzas sugeridas (01).</p></div>
+    <div class="stage"><div><div class="frame-label"><i class="ph ph-device-mobile"></i>Móvil</div><div class="frame phone"></div></div><div><div class="frame-label"><i class="ph ph-desktop"></i>Escritorio</div><div class="frame desk"></div></div></div>
+  </section>
+
+  <section class="opt" data-v="v1">
+    <div class="opt-head"><span class="opt-num">01</span><span class="opt-title">Con fotos</span>
+      <p class="opt-desc">Portada con foto y una franja fotográfica en cada categoría, con el título encima. Las pizzas sugeridas llevan una miniatura redonda. Es la más apetecible, pero depende mucho de tener buenas fotos (ahora todo sale de la única foto de la web).</p></div>
+    <div class="stage"><div><div class="frame-label"><i class="ph ph-device-mobile"></i>Móvil</div><div class="frame phone"></div></div><div><div class="frame-label"><i class="ph ph-desktop"></i>Escritorio</div><div class="frame desk"></div></div></div>
+  </section>
+
+  <section class="opt" data-v="v2">
+    <div class="opt-head"><span class="opt-num">02</span><span class="opt-title">Mantel vichy</span>
+      <p class="opt-desc">Recupera el vichy de la carta original: un mantel de cuadros arriba, cada categoría en un bloque que alterna verde bosque, rojo vino y negro con una trama de cuadros muy sutil, y la oferta con borde de costura. La más ligada a la marca.</p></div>
+    <div class="stage"><div><div class="frame-label"><i class="ph ph-device-mobile"></i>Móvil</div><div class="frame phone"></div></div><div><div class="frame-label"><i class="ph ph-desktop"></i>Escritorio</div><div class="frame desk"></div></div></div>
+  </section>
+
+  <section class="opt" data-v="v3">
+    <div class="opt-head"><span class="opt-num">03</span><span class="opt-title">Iconos e ingredientes</span>
+      <p class="opt-desc">Cada categoría tiene su icono en una baldosa de color, y los ingredientes de las pizzas sugeridas aparecen como etiquetas de colores por tipo (quesos, carnes, pescados, vegetales). Las hojas y los peces marcan los platos vegetales y con pescado. La más útil para decidir rápido.</p></div>
+    <div class="stage"><div><div class="frame-label"><i class="ph ph-device-mobile"></i>Móvil</div><div class="frame phone"></div></div><div><div class="frame-label"><i class="ph ph-desktop"></i>Escritorio</div><div class="frame desk"></div></div></div>
+  </section>
+
+  <section class="opt" data-v="v4">
+    <div class="opt-head"><span class="opt-num">04</span><span class="opt-title">Luz de horno</span>
+      <p class="opt-desc">Un resplandor anaranjado que late suavemente arriba, como la boca del horno, con textura de grano tipo película. Los nombres de categoría aparecen en grande y en contorno detrás de cada título, y unas líneas de brasa separan las secciones. La más atmosférica y la que mejor encaja con el hero elegido.</p></div>
+    <div class="stage"><div><div class="frame-label"><i class="ph ph-device-mobile"></i>Móvil</div><div class="frame phone"></div></div><div><div class="frame-label"><i class="ph ph-desktop"></i>Escritorio</div><div class="frame desk"></div></div></div>
+  </section>
+
+  <section class="opt" data-v="v5">
+    <div class="opt-head"><span class="opt-num">05</span><span class="opt-title">Carta de papel sobre madera</span>
+      <p class="opt-desc">La pizarra se convierte en una carta impresa en papel crema, con el borde superior troquelado y una tira de vichy rojo, apoyada sobre la madera de la foto. Contraste máximo para leer y sensación de pizzería de barrio de verdad.</p></div>
+    <div class="stage"><div><div class="frame-label"><i class="ph ph-device-mobile"></i>Móvil</div><div class="frame phone"></div></div><div><div class="frame-label"><i class="ph ph-desktop"></i>Escritorio</div><div class="frame desk"></div></div></div>
+  </section>
+
+  <div class="shell-note">
+    <b>Notas</b>
+    <ul>
+      <li>Textos y precios literales de los PDF; mismas etiquetas y enlaces que en la propuesta 05.</li>
+      <li>Franjas de foto: Bocadillos calientes, Bocadillos fríos, Hamburguesas, Perrito caliente, Ensaladas y Sandwiches usan fotos de stock de Unsplash (licencia gratuita para uso comercial). Pizzas, sugerencias, porciones e ingredientes siguen usando recortes de la foto actual de la web.</li>
+      <li>Variación 03: las hojas y peces se asignan automáticamente por el nombre del plato. Conviene que la pizzería lo revise.</li>
+      <li>Se pueden mezclar, por ejemplo la luz de horno de la 04 con los iconos de la 03.</li>
+    </ul>
+  </div>
+</div>
+
+<script src="carta-data.js"></script>
+<script>
+const ICON = {pizzas:'pizza',sugerencias:'chef-hat',porciones:'chart-pie-slice',calientes:'fire',frios:'snowflake',hamburguesas:'hamburger',perritos:'fork-knife',ensaladas:'leaf',sandwiches:'bread',ing:'cooking-pot'};
+const CROP = {pizzas:['170%','85% 45%'],sugerencias:['260%','75% 30%'],porciones:['240%','100% 70%'],calientes:['320%','42% 78%'],frios:['300%','22% 98%'],hamburguesas:['280%','62% 12%'],perritos:['260%','5% 30%'],ensaladas:['330%','88% 62%'],sandwiches:['300%','40% 4%'],ing:['350%','68% 52%']};
+// Fotos de stock (Unsplash License, uso comercial gratuito). Fuentes en docs/fotos-stock.md
+const U = (id, pos) => ({ img: `https://images.unsplash.com/${id}?w=1000&q=70&auto=format&fit=crop`, pos });
+const PHOTO = {
+  calientes: U('photo-1753798130695-3c060be80e83', '50% 45%'),
+  frios: U('photo-1749513762144-8991c898d95c', '50% 50%'),
+  hamburguesas: U('photo-1586816001966-79b736744398', '50% 42%'),
+  perritos: U('photo-1612392062335-300bb9bd3054', '50% 50%'),
+  ensaladas: U('photo-1544982590-068dabc956dc', '50% 55%'),
+  sandwiches: U('photo-1528736235302-52922df5c122', '50% 55%')
+};
+const THUMB = ['72% 42%','58% 55%','80% 30%','66% 70%','90% 52%'];
+const GROUPS = [
+  {k:'--q',icon:'cheese',label:'Quesos'},
+  {k:'--c',icon:'cow',label:'Carnes'},
+  {k:'--p',icon:'fish',label:'Pescados'},
+  {k:'--v',icon:'carrot',label:'Vegetales'},
+  {k:'--o',icon:'flame',label:'Otros'}
+];
+const GROUP_OF = {};
+ING.forEach((g, gi) => g.i.flatMap(x => x.split(' / ')).forEach(x => GROUP_OF[x] = gi));
+const tag = x => { const g = GROUPS[GROUP_OF[x]]; return `<span class="tag" style="--k:var(${g.k})"><i class="ph-fill ph-${g.icon}"></i>${x}</span>`; };
+const flags = n => {
+  const u = n.toUpperCase(); let f = '';
+  if (/VEGETAL|ESPAÑOLA|CHAMPIÑÓN|CEBOLLA|^MOZZARELLA|4 QUESOS/.test(u) && !/ATÚN|ATUN/.test(u)) f += '<i class="ph-fill ph-leaf flag leaf" aria-label="Vegetal" title="Vegetal"></i>';
+  if (/ATÚN|ATUN|ANCHOA|PALOMETA|AHUMADOS|MARINA/.test(u)) f += '<i class="ph-fill ph-fish flag fish" aria-label="Con pescado" title="Con pescado"></i>';
+  return f;
+};
+
+function render(v){
+  const isV = x => v === x || (v === 'v15' && (x === 'v1' || x === 'v5'));
+  const section = (c) => {
+    const crop = CROP[c.id];
+    const items = c.items.map((i, k) => {
+      const priceHtml = c.sized ? `${eur(i.m)}${eur(i.f)}` : eur(i.p).replace('class="eur"', 'class="eur one"');
+      const thumb = isV('v1') && c.id === 'sugerencias';
+      const nameExtra = isV('v3') && !i.s ? flags(i.n) : '';
+      const tags = isV('v3') && i.ing ? `<div class="tags">${i.ing.map(tag).join('')}</div>` : '';
+      const body = `<div class="ln"><span class="n">${i.n}${nameExtra}</span><span class="dots"></span>${priceHtml}</div>${i.d ? `<p class="d">${i.d}</p>` : ''}${tags}`;
+      return thumb ? `<li class="has-thumb"><span class="thumb" style="background-position:${THUMB[k]}" aria-hidden="true"></span><div>${body}</div></li>` : `<li class="${i.s ? 'sup' : ''}">${body}</li>`;
+    }).join('');
+    return `<section data-sec="${c.id}">
+      ${isV('v1') ? (PHOTO[c.id]
+        ? `<div class="ban" style="background-image:url('${PHOTO[c.id].img}');background-size:cover;background-position:${PHOTO[c.id].pos}" role="img" aria-label="${c.title} en MAMA PIZZA, Villaverde (Madrid)"></div>`
+        : `<div class="ban" style="background-size:${crop[0]};background-position:${crop[1]}" aria-hidden="true"></div>`) : ''}
+      <h3 data-wm="${c.label}">${isV('v3') ? `<span class="ico"><i class="ph-fill ph-${ICON[c.id]}"></i></span>` : ''}${c.title}${c.sub ? `<small>${c.sub}</small>` : ''}</h3>
+      ${c.note ? `<p class="note">${c.note}</p>` : ''}
+      ${c.sized ? `<div class="colh"><span>MEDIANA</span><span>FAMILIAR</span></div>` : ''}
+      <ul>${items}</ul></section>`;
+  };
+  const ingSection = () => {
+    if (isV('v3')) return `<section data-sec="ing" class="ingl"><h3 data-wm="Ingredientes"><span class="ico"><i class="ph-fill ph-${ICON.ing}"></i></span>${ING_TITLE}</h3>
+      ${ING.map((g, gi) => `<div class="grp"><b>${g.g}</b><div class="tags">${g.i.map(x => `<span class="tag" style="--k:var(${GROUPS[gi].k})"><i class="ph-fill ph-${GROUPS[gi].icon}"></i>${x}</span>`).join('')}</div></div>`).join('')}</section>`;
+    const crop = CROP.ing;
+    return `<section data-sec="ing" class="ingl">${isV('v1') ? `<div class="ban" style="background-size:${crop[0]};background-position:${crop[1]}" aria-hidden="true"></div>` : ''}<h3 data-wm="Ingredientes">${ING_TITLE}</h3>${ING.map(g => `<p><b>${g.g}</b>${g.i.join(', ')}</p>`).join('')}</section>`;
+  };
+  const legend = isV('v3') ? `<div class="legend">${GROUPS.slice(0,4).map(g => `<span><i class="ph-fill ph-${g.icon}" style="color:var(${g.k})"></i>${g.label}</span>`).join('')}<span><i class="ph-fill ph-leaf" style="color:var(--v)"></i>Vegetal</span><span><i class="ph-fill ph-fish" style="color:var(--p)"></i>Con pescado</span></div>` : '';
+  let head = cartaHead();
+  if (isV('v1')) head = head.replace('<header class="mh">', '<header class="mh"><div class="cover" role="img" aria-label="Pizza recién horneada de MAMA PIZZA sobre mesa de madera"></div>');
+  if (isV('v4')) head = head.replace('<header class="mh">', '<header class="mh"><div class="glow" aria-hidden="true"></div>');
+  return `<div class="carta ${v === 'v15' ? 'v5 v1 v15' : v}">
+    ${isV('v2') ? '<div class="tablecloth" aria-hidden="true"></div>' : ''}
+    ${head}${offer()}${legend}
+    <div class="board">${isV('v5') ? '<div class="stamp">Mama Pizza</div>' : ''}${C.map(section).join('')}${ingSection()}</div>
+    <div class="dock">
+      <div class="scrim"></div>
+      <div class="sheet" role="dialog" aria-label="Índice de la carta"><div class="grab"></div><b>Ir a</b>
+        <nav>${C.map(c => `<button type="button" data-id="${c.id}">${isV('v3') ? `<i class="ph-fill ph-${ICON[c.id]}"></i>` : ''}${c.label}</button>`).join('')}<button type="button" data-id="ing">${isV('v3') ? `<i class="ph-fill ph-${ICON.ing}"></i>` : ''}Ingredientes</button></nav></div>
+      <button type="button" class="fab" aria-expanded="false"><i class="ph-bold ph-list-bullets"></i>Carta</button>
+    </div></div>`;
+}
+
+function init(frame){
+  const dock = frame.querySelector('.dock'), fab = frame.querySelector('.fab');
+  const set = o => { dock.classList.toggle('open', o); fab.setAttribute('aria-expanded', String(o)); fab.innerHTML = o ? '<i class="ph-bold ph-x"></i>Cerrar' : '<i class="ph-bold ph-list-bullets"></i>Carta'; };
+  fab.addEventListener('click', () => set(!dock.classList.contains('open')));
+  frame.querySelector('.scrim').addEventListener('click', () => set(false));
+  frame.querySelectorAll('.sheet nav button').forEach(b => b.addEventListener('click', () => {
+    set(false);
+    const el = frame.querySelector(`[data-sec="${b.dataset.id}"]`);
+    const top = frame.scrollTop + el.getBoundingClientRect().top - frame.getBoundingClientRect().top - 12;
+    frame.scrollTo({ top, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  }));
+}
+
+document.querySelectorAll('.opt').forEach(sec => sec.querySelectorAll('.frame').forEach(f => { f.innerHTML = render(sec.dataset.v); init(f); }));
+</script>
+</body>
+</html>

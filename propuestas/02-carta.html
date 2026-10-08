@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mama Pizza · Propuestas de carta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Karla:wght@400;500;700&family=Bricolage+Grotesque:opsz,wght@12..96,800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<style>
+  /* ---------- Shell del documento de propuestas ---------- */
+  :root{--shell-bg:#F3F3F1;--shell-ink:#1D1F1C;--shell-mute:#5E625C;--shell-line:#DADBD6;--tomato:#E0412F}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--shell-bg);color:var(--shell-ink);font-family:"Karla",system-ui,sans-serif;line-height:1.5}
+  .shell{max-width:1320px;margin:0 auto;padding:40px 24px 120px}
+  .shell-head h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:clamp(28px,4vw,44px);letter-spacing:-.02em;line-height:1.05}
+  .shell-head p{color:var(--shell-mute);max-width:72ch;margin-top:10px}
+  .opt{margin-top:72px}
+  .opt-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;border-top:2px solid var(--shell-ink);padding-top:16px}
+  .opt-num{font-family:"Bricolage Grotesque";font-weight:800;font-size:56px;line-height:.9;color:var(--tomato)}
+  .opt-title{font-family:"Bricolage Grotesque";font-weight:800;font-size:28px;letter-spacing:-.01em}
+  .opt-desc{flex-basis:100%;color:var(--shell-mute);max-width:80ch}
+  .try{flex-basis:100%;font-size:14px;color:var(--shell-ink);display:flex;gap:8px;align-items:center;margin-top:4px}
+  .try i{color:var(--tomato);font-size:18px}
+  .stage{display:grid;grid-template-columns:1fr;gap:24px;margin-top:20px;align-items:start}
+  @media (min-width:1100px){.stage{grid-template-columns:375px minmax(0,1fr)}}
+  .frame-label{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--shell-mute);margin-bottom:8px;display:flex;gap:6px;align-items:center}
+  .frame{container-type:inline-size;position:relative;overflow-y:auto;overflow-x:hidden;border-radius:14px;background:#121310;box-shadow:0 18px 50px -20px rgba(30,40,30,.35);scrollbar-width:thin;scrollbar-color:#3a3b36 transparent}
+  .frame.desk{height:760px}
+  .frame.phone{width:375px;height:760px;border-radius:40px;border:10px solid #1D1F1C;scrollbar-width:none;margin:0 auto}
+  .frame.phone::-webkit-scrollbar{display:none}
+  .shell-note{margin-top:40px;padding:20px;border-radius:14px;background:#fff;border:1px solid var(--shell-line);font-size:15px}
+  .shell-note li{margin-left:18px;margin-top:4px}
+
+  /* ---------- Base común de la carta (tema elegido: Cinemático nocturno) ---------- */
+  .carta{--night:#121310;--s1:#1A1B18;--s2:#24251F;--line:rgba(246,243,238,.1);--ink:#F6F3EE;--mute:#ABA8A0;--red:#E0412F;--red-d:#C8321F;--green:#3E9B6A;
+    background:var(--night);color:var(--ink);font-family:"Archivo",sans-serif;min-height:100%;font-size:15px}
+  .carta button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  .carta .ph{line-height:1}
+  .mh{padding:28px 20px 18px}
+  @container (min-width:760px){.mh{padding:44px 48px 24px}}
+  .mh .kick{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:14px;color:#F2B8A8}
+  .mh .kick::before{content:"";width:28px;height:2px;background:var(--red)}
+  .mh h2{font-weight:900;font-stretch:125%;text-transform:uppercase;font-size:clamp(38px,11cqi,84px);line-height:.88;letter-spacing:-.02em;margin-top:8px}
+  .pdfs{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;font-size:13px;color:var(--mute);align-items:center}
+  .pdfs a{display:inline-flex;align-items:center;gap:6px;color:var(--ink);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:6px 12px;min-height:34px}
+  .pdfs a:hover{border-color:var(--ink)}
+  .eur{font-variant-numeric:tabular-nums;font-weight:700;white-space:nowrap}
+  .seg{display:inline-grid;grid-template-columns:1fr 1fr;background:var(--s2);border-radius:999px;padding:4px;position:relative;isolation:isolate}
+  .seg button{min-height:38px;padding:0 16px;border-radius:999px;font-weight:600;font-size:14px;color:var(--mute);transition:color .2s}
+  .seg button[aria-pressed="true"]{color:#fff}
+  .seg::before{content:"";position:absolute;z-index:-1;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:var(--red);transition:transform .35s cubic-bezier(.16,1,.3,1)}
+  .seg.is-f::before{transform:translateX(100%)}
+  .offer{margin:0 20px 8px;border-radius:18px;background:var(--red);color:#fff;padding:16px 18px;display:grid;gap:4px}
+  @container (min-width:760px){.offer{margin:0 48px 8px}}
+  .offer b{font-weight:900;font-stretch:115%;text-transform:uppercase;font-size:13px;letter-spacing:.04em;opacity:.85}
+  .offer p{font-size:15px;line-height:1.4}
+  .offer p strong{font-weight:800}
+  @media (prefers-reduced-motion:reduce){.carta *{transition:none!important;animation:none!important}}
+
+  /* =========================================================
+     M1 · PESTAÑAS FIJAS + LISTA
+     ========================================================= */
+  .m1 .bar{position:sticky;top:0;z-index:3;background:rgba(18,19,16,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .m1 .tabs{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;padding:12px 20px;scrollbar-width:none}
+  @container (min-width:760px){.m1 .tabs{padding:12px 48px}}
+  .m1 .tabs::-webkit-scrollbar{display:none}
+  .m1 .tabs a{scroll-snap-align:start;flex:none;display:inline-flex;align-items:center;min-height:38px;padding:0 14px;border-radius:999px;border:1px solid var(--line);color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;transition:background-color .2s,border-color .2s}
+  .m1 .tabs a.on{background:var(--ink);color:var(--night);border-color:var(--ink)}
+  .m1 .sizebar{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s cubic-bezier(.16,1,.3,1)}
+  .m1 .sizebar>div{overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 20px}
+  @container (min-width:760px){.m1 .sizebar>div{padding:0 48px}}
+  .m1 .sizebar.show{grid-template-rows:1fr}
+  .m1 .sizebar.show>div{padding-bottom:12px}
+  .m1 .sizebar span{font-size:13px;color:var(--mute)}
+  .m1 .cats{padding:8px 20px 80px}
+  @container (min-width:760px){.m1 .cats{padding:8px 48px 80px;display:grid;grid-template-columns:1fr 1fr;gap:0 56px;align-items:start}}
+  .m1 section{padding-top:28px;scroll-margin-top:120px}
+  .m1 h3{font-weight:900;font-stretch:115%;text-transform:uppercase;font-size:22px;letter-spacing:-.005em;line-height:1.05}
+  .m1 h3 small{display:block;font-size:12px;font-weight:600;color:var(--mute);letter-spacing:.04em;margin-top:4px}
+  .m1 .note{font-size:14px;color:var(--mute);margin-top:6px;font-style:italic;font-stretch:100%}
+  .m1 ul{list-style:none;margin-top:12px}
+  .m1 li{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:12px 0}
+  .m1 li+li{border-top:1px solid var(--line)}
+  .m1 .n{font-weight:700;font-stretch:100%;font-size:14.5px;line-height:1.3}
+  .m1 .d{font-size:13.5px;color:var(--mute);margin-top:3px;line-height:1.4}
+  .m1 li.sup .n{font-weight:500;color:var(--mute)}
+  .m1 .eur{font-size:15px;padding-top:1px}
+  .m1 .pm,.m1 .pf{display:inline-block;transition:opacity .25s,transform .25s}
+  .m1 .cats .pf,.m1 .cats.is-f .pm{display:none}
+  .m1 .cats.is-f .pf{display:inline-block}
+  .m1 .ing{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .m1 .ing b{flex-basis:100%;font-size:12px;letter-spacing:.06em;color:var(--mute);margin-top:10px;font-weight:600}
+  .m1 .ing span{font-size:13.5px;border:1px solid var(--line);border-radius:999px;padding:5px 11px}
+
+  /* =========================================================
+     M2 · CREA TU PIZZA
+     ========================================================= */
+  .m2 .builder{margin:6px 20px 0;border-radius:22px;background:var(--s1);border:1px solid var(--line);padding:20px 18px}
+  @container (min-width:760px){.m2 .wrap{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:32px;padding:0 48px;align-items:start}.m2 .builder{margin:6px 0 0}}
+  .m2 h3{font-weight:900;font-stretch:115%;text-transform:uppercase;font-size:24px;line-height:1}
+  .m2 h3 small{display:block;font-size:12px;font-weight:600;color:var(--mute);letter-spacing:.04em;margin-top:6px}
+  .m2 .note{font-size:14px;color:var(--mute);margin-top:8px}
+  .m2 .lbl{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:20px 0 10px}
+  .m2 .presets{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:0 18px}
+  .m2 .presets::-webkit-scrollbar{display:none}
+  .m2 .presets button{flex:none;border:1px solid var(--line);border-radius:14px;padding:10px 12px;text-align:left;min-width:132px}
+  .m2 .presets button b{display:block;font-weight:800;font-size:13.5px}
+  .m2 .presets button span{display:block;font-size:12px;color:var(--mute);margin-top:2px}
+  .m2 .presets button.on{border-color:var(--red);background:rgba(224,65,47,.12)}
+  .m2 .grp{font-size:12px;font-weight:600;color:var(--mute);margin:14px 0 8px}
+  .m2 .chips{display:flex;flex-wrap:wrap;gap:6px}
+  .m2 .chips button{min-height:38px;padding:0 13px;border-radius:999px;border:1px solid var(--line);font-size:14px;display:inline-flex;align-items:center;gap:6px;transition:background-color .15s,border-color .15s,transform .15s}
+  .m2 .chips button:active{transform:scale(.96)}
+  .m2 .chips button[aria-pressed="true"]{background:var(--ink);color:var(--night);border-color:var(--ink);font-weight:600}
+  .m2 .chips button[aria-pressed="true"]::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--red)}
+  .m2 .total{position:sticky;bottom:0;z-index:3;margin-top:18px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:rgba(18,19,16,.92);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+  .m2 .total .oferta{font-size:12.5px;color:#F2B8A8;display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s}
+  .m2 .total .oferta>span{overflow:hidden}
+  .m2 .total .oferta.show{grid-template-rows:1fr;margin-bottom:8px}
+  .m2 .total .row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .m2 .total small{display:block;font-size:12px;color:var(--mute);font-weight:600;letter-spacing:.02em}
+  .m2 .total .eur{font-size:26px;font-weight:900;font-stretch:110%;line-height:1}
+  .m2 .total a{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 20px;border-radius:999px;background:var(--red);color:#fff;font-weight:700;text-decoration:none}
+  .m2 .rest{padding:28px 20px 40px}
+  @container (min-width:760px){.m2 .rest{padding:6px 0 40px}}
+  .m2 .rest h4{font-weight:900;font-stretch:115%;text-transform:uppercase;font-size:18px;margin-bottom:8px}
+  .m2 details{border-top:1px solid var(--line)}
+  .m2 details:last-of-type{border-bottom:1px solid var(--line)}
+  .m2 summary{list-style:none;display:flex;justify-content:space-between;align-items:center;min-height:56px;font-weight:800;font-stretch:105%;text-transform:uppercase;font-size:15px;cursor:pointer}
+  .m2 summary::-webkit-details-marker{display:none}
+  .m2 summary i{transition:transform .3s;color:var(--mute)}
+  .m2 details[open] summary i{transform:rotate(45deg);color:var(--red)}
+  .m2 .dl{list-style:none;padding-bottom:14px}
+  .m2 .dl li{display:flex;justify-content:space-between;gap:14px;padding:8px 0;font-size:14px}
+  .m2 .dl .d{display:block;color:var(--mute);font-size:13px}
+  .m2 .dl li.sup{color:var(--mute)}
+  .m2 .dl .hd{font-size:11.5px;color:var(--mute);letter-spacing:.06em}
+  .m2 .dl .two{display:grid;grid-template-columns:62px 62px;text-align:right;gap:6px}
+
+  /* =========================================================
+     M3 · ACORDEÓN POR CATEGORÍAS
+     ========================================================= */
+  .m3 .list{padding:12px 20px 60px;display:grid;gap:10px}
+  @container (min-width:760px){.m3 .list{padding:12px 48px 60px;grid-template-columns:1fr 1fr;align-items:start;gap:12px}}
+  .m3 details{border-radius:20px;background:var(--s1);border:1px solid var(--line);overflow:hidden;transition:border-color .2s}
+  .m3 details[open]{border-color:rgba(246,243,238,.22)}
+  .m3 summary{list-style:none;display:grid;grid-template-columns:1fr auto;align-items:center;gap:4px 12px;padding:18px;cursor:pointer;min-height:72px}
+  .m3 summary::-webkit-details-marker{display:none}
+  .m3 summary h3{font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:17px;line-height:1.1}
+  .m3 summary .meta{grid-column:1;font-size:13px;color:var(--mute)}
+  .m3 summary .tog{grid-row:1/span 2;grid-column:2;width:40px;height:40px;border-radius:50%;background:var(--s2);display:grid;place-items:center;transition:transform .35s cubic-bezier(.16,1,.3,1),background-color .2s}
+  .m3 details[open] .tog{transform:rotate(180deg);background:var(--red)}
+  .m3 .body{padding:0 18px 16px}
+  @media (prefers-reduced-motion:no-preference){.m3 details[open] .body{animation:fold .45s cubic-bezier(.16,1,.3,1)}@keyframes fold{from{opacity:0;transform:translateY(-6px)}}}
+  .m3 .note{font-size:13.5px;color:var(--mute);font-style:italic;margin-bottom:6px}
+  .m3 .tbl{display:grid;grid-template-columns:1fr 64px 64px;gap:0 8px;font-size:14px}
+  .m3 .tbl>*{padding:9px 0;border-top:1px solid var(--line)}
+  .m3 .tbl .h{border-top:0;font-size:11.5px;letter-spacing:.06em;color:var(--mute);padding-top:2px;font-weight:600}
+  .m3 .tbl .r{text-align:right}
+  .m3 .tbl .sup{color:var(--mute)}
+  .m3 .tbl .d{display:block;font-size:12.5px;color:var(--mute);margin-top:2px}
+  .m3 .one{list-style:none;font-size:14px}
+  .m3 .one li{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-top:1px solid var(--line)}
+  .m3 .one .d{display:block;font-size:12.5px;color:var(--mute);margin-top:2px}
+  .m3 .one li.sup{color:var(--mute)}
+  .m3 .ingw{display:grid;gap:10px}
+  .m3 .ingw b{font-size:12px;letter-spacing:.06em;color:var(--mute);font-weight:600}
+  .m3 .ingw p{font-size:14px;margin-top:2px}
+
+  /* =========================================================
+     M4 · TARJETAS DESLIZABLES
+     ========================================================= */
+  .m4 .blk{padding:22px 0 6px}
+  .m4 .blk>h3{padding:0 20px;font-weight:900;font-stretch:115%;text-transform:uppercase;font-size:21px;line-height:1.05;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 10px}
+  @container (min-width:760px){.m4 .blk>h3,.m4 .blk>p.note{padding:0 48px}}
+  .m4 .blk>h3 small{font-size:12px;font-weight:600;color:var(--mute);letter-spacing:.02em}
+  .m4 .blk>.note{padding:0 20px;font-size:13.5px;color:var(--mute);margin-top:4px}
+  .m4 .rail{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:14px 20px 8px;scroll-padding:0 20px;scrollbar-width:none}
+  @container (min-width:760px){.m4 .rail{padding:14px 48px 8px;scroll-padding:0 48px}}
+  .m4 .rail::-webkit-scrollbar{display:none}
+  .m4 .card{scroll-snap-align:start;flex:none;width:78cqi;max-width:300px;border-radius:22px;background:var(--s1);border:1px solid var(--line);padding:18px;display:flex;flex-direction:column}
+  .m4 .card.sm{width:64cqi;max-width:240px}
+  .m4 .card h4{font-weight:800;font-stretch:105%;font-size:15.5px;line-height:1.25;text-transform:uppercase}
+  .m4 .card .d{font-size:13.5px;color:var(--mute);margin-top:6px;line-height:1.4}
+  .m4 .card .foot{margin-top:auto;padding-top:16px;display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
+  .m4 .card .eur{font-size:22px;font-weight:900;font-stretch:110%}
+  .m4 .card.sug{width:84cqi;max-width:330px;padding:0;overflow:hidden}
+  .m4 .card.sug .img{height:150px;background:url(assets/pizza.jpg) center/cover}
+  .m4 .card.sug .in{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
+  .m4 .card.sug h4{font-size:20px;font-weight:900;font-stretch:115%}
+  .m4 .sizes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:auto;padding-top:14px}
+  .m4 .sizes div{border-radius:14px;background:var(--s2);padding:10px 12px}
+  .m4 .sizes small{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--mute)}
+  .m4 .sizes .eur{font-size:19px;font-weight:900}
+  .m4 .stepper{margin:14px 20px 0;border-radius:22px;background:var(--s1);border:1px solid var(--line);padding:18px}
+  @container (min-width:760px){.m4 .stepper{margin:14px 48px 0;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}}
+  .m4 .stepper .ctl{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .m4 .stepper .ctl button{width:48px;height:48px;border-radius:50%;background:var(--s2);display:grid;place-items:center;font-size:20px}
+  .m4 .stepper .ctl button:active{transform:scale(.94)}
+  .m4 .stepper .ctl output{text-align:center;font-weight:800;font-stretch:105%;text-transform:uppercase;font-size:15px}
+  .m4 .stepper .note{font-size:13px;color:var(--mute);margin-top:12px}
+  .m4 .stepper .sizes{padding-top:14px}
+  .m4 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 20px 0}
+  @container (min-width:760px){.m4 .grid{grid-template-columns:repeat(4,1fr);padding:14px 48px 0}}
+  .m4 .tile{border-radius:18px;background:var(--s1);border:1px solid var(--line);padding:14px;min-height:96px;display:flex;flex-direction:column;justify-content:space-between}
+  .m4 .tile b{font-weight:800;font-size:14px;text-transform:uppercase}
+  .m4 .tile .eur{font-size:20px;font-weight:900;font-stretch:110%;color:#F2B8A8}
+  .m4 .tile.sup{background:none;border-style:dashed}
+  .m4 .tile.sup b{text-transform:none;font-weight:600;color:var(--mute)}
+  .m4 .supl{padding:8px 20px 0;font-size:13px;color:var(--mute)}
+  @container (min-width:760px){.m4 .supl{padding:8px 48px 0}}
+  .m4 .ingc{padding:14px 20px 50px;display:flex;flex-wrap:wrap;gap:6px}
+  @container (min-width:760px){.m4 .ingc{padding:14px 48px 50px}}
+  .m4 .ingc b{flex-basis:100%;font-size:12px;letter-spacing:.06em;color:var(--mute);font-weight:600;margin-top:10px}
+  .m4 .ingc span{font-size:13.5px;border:1px solid var(--line);border-radius:999px;padding:5px 11px}
+
+  /* =========================================================
+     M5 · PIZARRA CON ÍNDICE
+     ========================================================= */
+  .m5 .board{padding:4px 20px 90px}
+  @container (min-width:760px){.m5 .board{padding:4px 48px 90px;columns:2;column-gap:64px}}
+  .m5 section{break-inside:avoid;padding-top:30px;scroll-margin-top:20px}
+  .m5 h3{font-weight:900;font-stretch:125%;text-transform:uppercase;font-size:26px;line-height:.95;letter-spacing:-.01em;color:var(--ink)}
+  .m5 h3 small{display:block;font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--red);margin-top:6px;font-stretch:100%}
+  .m5 .note{font-size:14px;color:var(--mute);font-style:italic;margin-top:6px}
+  .m5 .colh{display:flex;justify-content:flex-end;gap:0;margin-top:12px;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--mute)}
+  .m5 .colh span{width:64px;text-align:right}
+  .m5 ul{list-style:none;margin-top:8px}
+  .m5 li{padding:7px 0}
+  .m5 .ln{display:flex;align-items:baseline;gap:8px;font-size:14.5px}
+  .m5 .ln .n{font-weight:700}
+  .m5 .ln .dots{flex:1;min-width:16px;border-bottom:2px dotted rgba(246,243,238,.22);transform:translateY(-4px)}
+  .m5 .ln .eur{width:64px;text-align:right;flex:none}
+  .m5 .ln .eur.one{width:auto}
+  .m5 .d{font-size:13px;color:var(--mute);margin-top:2px;max-width:42ch}
+  .m5 li.sup .n{font-weight:500;color:var(--mute)}
+  .m5 .ingl p{font-size:14px;margin-top:6px;line-height:1.55}
+  .m5 .ingl p b{font-size:12px;letter-spacing:.06em;color:var(--mute);font-weight:600;display:block}
+  .m5 .dock{position:sticky;bottom:0;height:0;z-index:4}
+  .m5 .fab{position:absolute;right:16px;bottom:16px;display:inline-flex;align-items:center;gap:8px;min-height:50px;padding:0 20px;border-radius:999px;background:var(--red);color:#fff!important;font-weight:700;box-shadow:0 14px 30px -10px rgba(224,65,47,.6)}
+  .m5 .scrim{position:absolute;left:0;right:0;bottom:0;height:9999px;background:rgba(10,10,9,.55);opacity:0;pointer-events:none;transition:opacity .3s}
+  .m5 .sheet{position:absolute;left:0;right:0;bottom:0;background:var(--s1);border-radius:26px 26px 0 0;border-top:1px solid var(--line);padding:10px 16px 84px;transform:translateY(105%);transition:transform .45s cubic-bezier(.16,1,.3,1)}
+  @container (min-width:760px){.m5 .sheet{left:auto;right:16px;bottom:76px;width:320px;padding:14px 16px 16px;border-radius:22px;border:1px solid var(--line);transform:translateY(12px) scale(.98);opacity:0;pointer-events:none;transition:transform .3s cubic-bezier(.16,1,.3,1),opacity .2s}}
+  .m5 .dock.open .scrim{opacity:1;pointer-events:auto}
+  .m5 .dock.open .sheet{transform:none;opacity:1;pointer-events:auto}
+  .m5 .grab{width:40px;height:4px;border-radius:4px;background:rgba(246,243,238,.25);margin:0 auto 12px}
+  @container (min-width:760px){.m5 .grab{display:none}}
+  .m5 .sheet b{display:block;font-weight:900;font-stretch:115%;text-transform:uppercase;font-size:14px;color:var(--mute);margin:0 4px 8px}
+  .m5 .sheet nav{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .m5 .sheet nav button{min-height:48px;text-align:left;padding:0 14px;border-radius:14px;background:var(--s2);font-weight:600;font-size:14px}
+  .m5 .sheet nav button:active{background:var(--red)}
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <header class="shell-head">
+    <h1>Componente 2 · La carta</h1>
+    <p>Cinco formas de pasar los tres PDF (Menú, Porciones e Ingredientes) a una carta en HTML: legible en el móvil, sin zoom e indexable por Google. Todas usan el estilo elegido (04 · Cinemático nocturno) y los textos y precios literales de los PDF. <b>Todo es interactivo:</b> pulsa, desliza y haz scroll dentro de los marcos.</p>
+  </header>
+
+  <section class="opt" data-opt="m1">
+    <div class="opt-head">
+      <span class="opt-num">01</span><span class="opt-title">Pestañas fijas + lista</span>
+      <p class="opt-desc">El patrón de las apps de delivery: barra de categorías siempre visible que se va marcando según bajas, y un selector Mediana / Familiar que aparece solo en las secciones de pizzas para ver un único precio, más grande. Rápida de escanear.</p>
+      <p class="try"><i class="ph-fill ph-hand-tap"></i>Prueba: toca una categoría y cambia a "Familiar" en la sección de pizzas.</p>
+    </div>
+    <div class="stage">
+      <div><div class="frame-label"><i class="ph ph-device-mobile"></i>Móvil</div><div class="frame phone"></div></div>
+      <div><div class="frame-label"><i class="ph ph-desktop"></i>Escritorio</div><div class="frame desk"></div></div>
+    </div>
+  </section>
+
+  <section class="opt" data-opt="m2">
+    <div class="opt-head">
+      <span class="opt-num">02</span><span class="opt-title">Crea tu pizza</span>
+      <p class="opt-desc">Convierte el lema de la carta ("La Pizza como tú la quieres") en un configurador: eliges tamaño e ingredientes y el precio se calcula con la tabla real. Las sugerencias cargan sus ingredientes de un toque, y si eliges 3 o más avisa de la oferta 2 x 1. El resto de la carta queda en desplegables.</p>
+      <p class="try"><i class="ph-fill ph-hand-tap"></i>Prueba: toca "MARINA" y quita o añade ingredientes.</p>
+    </div>
+    <div class="stage">
+      <div><div class="frame-label"><i class="ph ph-device-mobile"></i>Móvil</div><div class="frame phone"></div></div>
+      <div><div class="frame-label"><i class="ph ph-desktop"></i>Escritorio</div><div class="frame desk"></div></div>
+    </div>
+  </section>
+
+  <section class="opt" data-opt="m3">
+    <div class="opt-head">
+      <span class="opt-num">03</span><span class="opt-title">Acordeón por categorías</span>
+      <p class="opt-desc">Toda la carta cabe en una pantalla: cada categoría es una tarjeta con su número de platos y el precio "desde". Al abrir una se cierra la anterior. Las pizzas se ven en tabla compacta con las dos columnas de tamaño.</p>
+      <p class="try"><i class="ph-fill ph-hand-tap"></i>Prueba: abre "PIZZAS" y luego "BOCADILLOS CALIENTES".</p>
+    </div>
+    <div class="stage">
+      <div><div class="frame-label"><i class="ph ph-device-mobile"></i>Móvil</div><div class="frame phone"></div></div>
+      <div><div class="frame-label"><i class="ph ph-desktop"></i>Escritorio</div><div class="frame desk"></div></div>
+    </div>
+  </section>
+
+  <section class="opt" data-opt="m4">
+    <div class="opt-head">
+      <span class="opt-num">04</span><span class="opt-title">Tarjetas deslizables</span>
+      <p class="opt-desc">Cada categoría es una fila de tarjetas que se desliza con el pulgar, como en Netflix o Glovo. Las pizzas sugeridas llevan foto y los dos precios. La tabla de precios se convierte en un contador (+ / −) de ingredientes, y las porciones en una cuadrícula de baldosas.</p>
+      <p class="try"><i class="ph-fill ph-hand-tap"></i>Prueba: desliza las sugerencias y usa el + / − del contador.</p>
+    </div>
+    <div class="stage">
+      <div><div class="frame-label"><i class="ph ph-device-mobile"></i>Móvil</div><div class="frame phone"></div></div>
+      <div><div class="frame-label"><i class="ph ph-desktop"></i>Escritorio</div><div class="frame desk"></div></div>
+    </div>
+  </section>
+
+  <section class="opt" data-opt="m5">
+    <div class="opt-head">
+      <span class="opt-num">05</span><span class="opt-title">Pizarra con índice</span>
+      <p class="opt-desc">Una carta de las de toda la vida en pantalla: titulares grandes, puntos guía hasta el precio y columnas Mediana / Familiar. Un botón flotante "Carta" abre un panel inferior con el índice para saltar a cualquier sección. En escritorio se lee a dos columnas, como una carta impresa.</p>
+      <p class="try"><i class="ph-fill ph-hand-tap"></i>Prueba: pulsa el botón rojo "Carta" y elige una sección.</p>
+    </div>
+    <div class="stage">
+      <div><div class="frame-label"><i class="ph ph-device-mobile"></i>Móvil</div><div class="frame phone"></div></div>
+      <div><div class="frame-label"><i class="ph ph-desktop"></i>Escritorio</div><div class="frame desk"></div></div>
+    </div>
+  </section>
+
+  <div class="shell-note">
+    <b>Notas</b>
+    <ul>
+      <li>Los nombres, descripciones y precios son literales de los PDF. Solo se añade el símbolo € y etiquetas cortas de navegación (por ejemplo "Bocadillos fríos" en las pestañas).</li>
+      <li>Los enlaces "Ingredientes", "Menú" y "Porciones" a los PDF se conservan (mismo texto de enlace que la web actual), para quien quiera descargarlos.</li>
+      <li>En la web final la carta llevará datos estructurados <code>Menu</code> / <code>MenuSection</code> / <code>MenuItem</code> de schema.org con los precios, para que Google los entienda.</li>
+      <li>Propuesta 02: interpreto el "SUPLEMENTO" de la tabla de pizzas (2,50 / 3,00) como el precio de cada ingrediente a partir del sexto. <b>Hay que confirmarlo con la pizzería.</b></li>
+    </ul>
+  </div>
+</div>
+
+<script>
+/* ======================= DATOS LITERALES DE LA CARTA ======================= */
+const PDF = {
+  ing: 'https://cdn.website.dish.co/media/30/42/4655350/Ingredientes.pdf',
+  menu: 'https://cdn.website.dish.co/media/3e/6e/9716432/Menu.pdf',
+  por: 'https://cdn.website.dish.co/media/3d/56/9716433/Porciones.pdf'
+};
+const OFFER = {
+  title: 'OFERTA:',
+  html: '<strong>2 x 1</strong> en Pizzas medianas y familiares de 3 o más ingredientes. <strong>Lunes a Jueves (sólo para llevar)</strong> Oferta no válida en festivos y vísperas de fiesta. <strong>50% en segunda pizza fines de semana y festivos.</strong>'
+};
+const C = [
+  { id:'pizzas', label:'Pizzas', title:'PIZZAS', sub:'(PRECIO SEGÚN INGREDIENTES)', note:'Todas las Pizzas llevan como base : Salsa de Tomate y Mozzarella', sized:true, items:[
+    {n:'MAMA PIZZA BASE',m:'12,40',f:'18,60'},
+    {n:'BASE + 1 INGREDIENTE',m:'14,20',f:'20,80'},
+    {n:'BASE + 2 INGREDIENTES',m:'16,00',f:'23,00'},
+    {n:'BASE + 3 INGREDIENTES',m:'17,80',f:'25,20'},
+    {n:'BASE + 4 INGREDIENTES',m:'19,60',f:'27,40'},
+    {n:'BASE + 5 INGREDIENTES',m:'21,40',f:'29,60'},
+    {n:'SUPLEMENTO',m:'2,50',f:'3,00',s:true}
+  ]},
+  { id:'sugerencias', label:'Sugerencias', title:'PIZZAS (SUGERENCIAS)', sized:true, items:[
+    {n:'TROPICAL',d:'Base, Jamón y Piña (Base + 2 ingredientes)',m:'16,00',f:'23,00',ing:['Jamón York','Piña']},
+    {n:'VEGETAL',d:'Base, Champiñón, Cebolla, Pim. verdes, Tomate natural (Base + 4 ingredientes)',m:'19,60',f:'27,40',ing:['Champiñón','Cebolla','Pimiento verde','Tomate']},
+    {n:'4 ESTACIONES',d:'Base, Jamón, Champiñón, Chorizo, Tomate natural (Base + 4 ingredientes)',m:'19,60',f:'27,40',ing:['Jamón York','Champiñón','Chorizo','Tomate']},
+    {n:'MARINA',d:'Base, Atún, Palometa ahumada, Anchoas, Pim. Morrón, Tomate natural (Base + 5 ingredientes)',m:'21,40',f:'29,60',ing:['Atún','Palometa ahumada','Anchoa ahumada','Pimiento rojo','Tomate']},
+    {n:'MAMA PIZZA',d:'Base, Ternera, Bacon, Chorizo, Pim. verdes, Cebolla (Base + 5 ingredientes)',m:'21,40',f:'29,60',ing:['Ternera','Bacon','Chorizo','Pimiento verde','Cebolla']}
+  ]},
+  { id:'porciones', label:'Porciones', title:'PIZZAS (PORCIONES)', items:[
+    {n:'MOZZARELLA',p:'3,00'},{n:'JAMON',p:'3,30'},{n:'BACON',p:'3,30'},{n:'4 QUESOS',p:'3,30'},{n:'CHAMPIÑÓN',p:'3,30'},{n:'CEBOLLA',p:'3,30'},
+    {n:'CHORIZO',p:'3,40'},{n:'POLLO',p:'3,40'},{n:'ATUN',p:'3,40'},{n:'AHUMADOS',p:'3,40'},{n:'TERNERA',p:'3,40'},
+    {n:'Suplemento ingrediente',p:'0,60',s:true}
+  ]},
+  { id:'calientes', label:'Bocadillos calientes', title:'BOCADILLOS CALIENTES', note:'Deliciosos bocadillos con pan recién horneado', items:[
+    {n:'JAMON YORK, SALCHICHA FRANKFURT, CEBOLLA Y MAHONESA',p:'5,00'},
+    {n:'BACON Y TOMATE (O QUESO)',p:'4,50'},
+    {n:'LOMO ADOBADO Y TOMATE (O QUESO)',p:'5,00'},
+    {n:'TORTILLA PATATAS Y PIM. VERDE (O MAHONESA)',p:'4,30'},
+    {n:'TORTILLA PATATAS, JAMON SERRANO Y TOMATE',p:'5,00'},
+    {n:'SUPLEMENTO POR PRODUCTO',p:'1,00',s:true}
+  ]},
+  { id:'frios', label:'Bocadillos fríos', title:'BOCADILLOS FRIOS', items:[
+    {n:'VEGETAL (Tomate, lechuga, cebolla y pepinillo)',p:'4,00'},
+    {n:'VEGETAL CON ATÚN',p:'4,50'},
+    {n:'JAMÓN SERRANO Y TOMATE',p:'4,50'},
+    {n:'CHORIZO, TABASCO Y MAHONESA',p:'4,50'},
+    {n:'ROQUEFORT Y MANTEQUILLA',p:'5,00'},
+    {n:'ATÚN, PIM.MORRÓN Y MAHONESA',p:'5,00'},
+    {n:'PALOMETA AHUMADA, ANCHOAS Y MAHONESA',p:'5,00'},
+    {n:'SUPLEMENTO POR PRODUCTO',p:'1,00',s:true}
+  ]},
+  { id:'hamburguesas', label:'Hamburguesas', title:'HAMBURGUESAS', items:[
+    {n:'HAMBURGUESA',d:'Carne de ternera con queso fundido, tomate, lechuga y cebolla',p:'5,00'},
+    {n:'SUPLEMENTO (Cada uno)',p:'1,00',s:true}
+  ]},
+  { id:'perritos', label:'Perritos', title:'PERRITO CALIENTE', items:[
+    {n:'PERRITO CALIENTE (sencillo)',p:'2,70'},
+    {n:'PERRITO ESPECIAL (con cebolla a la plancha y mozzarella)',p:'3,50'}
+  ]},
+  { id:'ensaladas', label:'Ensaladas', title:'ENSALADAS', items:[
+    {n:'ESPAÑOLA',d:'Lechuga, tomate, cebolla, atún y aceitunas',p:'4,00'},
+    {n:'AMERICANA',d:'Lechuga, tomate, zanahoria, maíz, jamón york, queso y salsa rosa',p:'4,20'}
+  ]},
+  { id:'sandwiches', label:'Sandwiches', title:'SANDWICHES', items:[
+    {n:'MIXTO (Jamón y Queso)',p:'4,10'},
+    {n:'VEGETAL (Tomate, lechuga, cebolla y pepinillo)',p:'3,70'},
+    {n:'VEGETAL CON ATÚN',p:'4,10'}
+  ]}
+];
+const ING_TITLE = 'INGREDIENTES PIZZAS';
+const ING = [
+  {g:'QUESOS:',i:['4 Quesos','Mozzarella','Roquefort']},
+  {g:'CARNES/EMBUTIDOS:',i:['Jamón Serrano','Jamón York','Bacon','Ternera','Pollo','Chorizo','Salchicha Frankfurt']},
+  {g:'PESCADOS (Conservas):',i:['Atún','Palometa ahumada','Anchoa ahumada']},
+  {g:'VEGETALES/FRUTAS:',i:['Piña','Champiñón','Tomate','Pimiento verde / Pimiento rojo','Cebolla','Aceitunas verdes / Aceitunas negras']},
+  {g:'OTROS:',i:['Salsa barbacoa']}
+];
+
+/* ======================= HELPERS ======================= */
+const eur = p => `<span class="eur">${p} €</span>`;
+const num = p => parseFloat(p.replace(',', '.'));
+const fmt = n => n.toFixed(2).replace('.', ',');
+const real = c => c.items.filter(i => !i.s);
+const from = c => { const v = real(c).map(i => num(i.p ?? i.m)); return fmt(Math.min(...v)); };
+const cartaHead = () => `
+  <header class="mh">
+    <span class="kick">La Pizza como tú la quieres....</span>
+    <h2>Nuestro menú</h2>
+    <div class="pdfs"><i class="ph ph-file-pdf"></i>
+      <a href="${PDF.ing}" target="_blank" rel="noopener">Ingredientes</a>
+      <a href="${PDF.menu}" target="_blank" rel="noopener">Menú</a>
+      <a href="${PDF.por}" target="_blank" rel="noopener">Porciones</a>
+    </div>
+  </header>`;
+const offer = () => `<div class="offer"><b>${OFFER.title}</b><p>${OFFER.html}</p></div>`;
+const seg = () => `<div class="seg" role="group" aria-label="Tamaño"><button type="button" aria-pressed="true" data-s="m">Mediana</button><button type="button" aria-pressed="false" data-s="f">Familiar</button></div>`;
+const bindSeg = (root, onChange) => root.querySelectorAll('.seg').forEach(s => s.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  const isF = b.dataset.s === 'f';
+  root.querySelectorAll('.seg').forEach(x => { x.classList.toggle('is-f', isF); x.querySelectorAll('button').forEach(y => y.setAttribute('aria-pressed', String(y.dataset.s === b.dataset.s))); });
+  onChange(isF);
+}));
+const scrollFrameTo = (frame, el, offset = 0) => frame.scrollTo({ top: el.offsetTop - offset, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+
+/* ======================= M1 ======================= */
+const M1 = {
+  html: () => `<div class="carta m1">${cartaHead()}${offer()}
+    <div class="bar">
+      <nav class="tabs" aria-label="Categorías">${C.map(c=>`<a href="#m1-${c.id}" data-id="${c.id}">${c.label}</a>`).join('')}<a href="#m1-ing" data-id="ing">Ingredientes</a></nav>
+      <div class="sizebar"><div><span>Precio para</span>${seg()}</div></div>
+    </div>
+    <div class="cats">
+      ${C.map(c=>`<section data-sec="${c.id}" class="${c.sized?'sized':''}">
+        <h3>${c.title}${c.sub?`<small>${c.sub}</small>`:''}</h3>${c.note?`<p class="note">${c.note}</p>`:''}
+        <ul>${c.items.map(i=>`<li class="${i.s?'sup':''}"><div><div class="n">${i.n}</div>${i.d?`<div class="d">${i.d}</div>`:''}</div>
+          ${c.sized?`<span><span class="pm">${eur(i.m)}</span><span class="pf">${eur(i.f)}</span></span>`:eur(i.p)}</li>`).join('')}</ul>
+      </section>`).join('')}
+      <section data-sec="ing"><h3>${ING_TITLE}</h3><div class="ing">${ING.map(g=>`<b>${g.g}</b>${g.i.map(x=>`<span>${x}</span>`).join('')}`).join('')}</div></section>
+    </div></div>`,
+  init(frame){
+    const root = frame.querySelector('.m1'), tabs = root.querySelector('.tabs'), sizebar = root.querySelector('.sizebar');
+    bindSeg(root, isF => root.querySelector('.cats').classList.toggle('is-f', isF));
+    const setOn = id => {
+      tabs.querySelectorAll('a').forEach(a => a.classList.toggle('on', a.dataset.id === id));
+      const a = tabs.querySelector(`[data-id="${id}"]`); if (a) tabs.scrollTo({ left: a.offsetLeft - 20, behavior: 'smooth' });
+      sizebar.classList.toggle('show', id === 'pizzas' || id === 'sugerencias');
+    };
+    tabs.addEventListener('click', e => { const a = e.target.closest('a'); if (!a) return; e.preventDefault();
+      const sec = root.querySelector(`[data-sec="${a.dataset.id}"]`); scrollFrameTo(frame, sec, root.querySelector('.bar').offsetHeight + 4); });
+    const io = new IntersectionObserver(es => { es.forEach(en => { if (en.isIntersecting) setOn(en.target.dataset.sec); }); }, { root: frame, rootMargin: '-35% 0px -60% 0px' });
+    root.querySelectorAll('[data-sec]').forEach(s => io.observe(s));
+  }
+};
+
+/* ======================= M2 ======================= */
+const ALL_ING = ING.map(g => ({ g: g.g, i: g.i.flatMap(x => x.split(' / ')) }));
+const M2 = {
+  html: () => `<div class="carta m2">${cartaHead()}${offer()}
+    <div class="wrap">
+      <div>
+        <div class="builder">
+          <h3>PIZZAS<small>(PRECIO SEGÚN INGREDIENTES)</small></h3>
+          <p class="note">Todas las Pizzas llevan como base : Salsa de Tomate y Mozzarella</p>
+          <p class="lbl">Tamaño</p>${seg()}
+          <p class="lbl">PIZZAS (SUGERENCIAS)</p>
+          <div class="presets">${C[1].items.map((s,k)=>`<button type="button" data-k="${k}"><b>${s.n}</b><span>${s.ing.length} ingredientes</span></button>`).join('')}</div>
+          <p class="lbl">${ING_TITLE}</p>
+          ${ALL_ING.map(g=>`<p class="grp">${g.g}</p><div class="chips">${g.i.map(x=>`<button type="button" aria-pressed="false" data-i="${x}">${x}</button>`).join('')}</div>`).join('')}
+        </div>
+      </div>
+      <div class="rest">
+        <h4>El resto de la carta</h4>
+        <details><summary>PIZZAS (PRECIO SEGÚN INGREDIENTES)<i class="ph-bold ph-plus"></i></summary>
+          <ul class="dl"><li class="hd"><span></span><span class="two"><span>MEDIANA</span><span>FAMILIAR</span></span></li>
+          ${C[0].items.map(i=>`<li class="${i.s?'sup':''}"><span>${i.n}</span><span class="two">${eur(i.m)}${eur(i.f)}</span></li>`).join('')}</ul></details>
+        ${C.slice(2).map(c=>`<details><summary>${c.title}<i class="ph-bold ph-plus"></i></summary>
+          <ul class="dl">${c.note?`<li class="sup"><em>${c.note}</em></li>`:''}${c.items.map(i=>`<li class="${i.s?'sup':''}"><span>${i.n}${i.d?`<span class="d">${i.d}</span>`:''}</span>${eur(i.p)}</li>`).join('')}</ul></details>`).join('')}
+      </div>
+    </div>
+    <div class="total">
+      <div class="oferta"><span><i class="ph-fill ph-tag"></i> 2 x 1 en Pizzas medianas y familiares de 3 o más ingredientes. Lunes a Jueves (sólo para llevar)</span></div>
+      <div class="row"><div><small class="what">MAMA PIZZA BASE · Mediana</small><span class="eur big">12,40 €</span></div>
+      <a href="tel:+34917954422"><i class="ph-bold ph-phone"></i>Reserva</a></div>
+    </div>
+  </div>`,
+  init(frame){
+    const root = frame.querySelector('.m2'); let isF = false;
+    const T = C[0].items;
+    const calc = () => {
+      const sel = [...root.querySelectorAll('.chips [aria-pressed="true"]')].map(b => b.dataset.i);
+      const n = sel.length, k = isF ? 'f' : 'm';
+      const price = n <= 5 ? num(T[n][k]) : num(T[5][k]) + (n - 5) * num(T[6][k]);
+      const label = n === 0 ? 'MAMA PIZZA BASE' : n <= 5 ? T[n].n : `BASE + 5 INGREDIENTES + ${n-5} SUPLEMENTO`;
+      root.querySelector('.what').textContent = `${label} · ${isF ? 'Familiar' : 'Mediana'}`;
+      root.querySelector('.big').textContent = `${fmt(price)} €`;
+      root.querySelector('.oferta').classList.toggle('show', n >= 3);
+      root.querySelectorAll('.presets button').forEach(b => { const s = C[1].items[b.dataset.k].ing; b.classList.toggle('on', s.length === n && s.every(x => sel.includes(x))); });
+    };
+    bindSeg(root, f => { isF = f; calc(); });
+    root.querySelectorAll('.chips button').forEach(b => b.addEventListener('click', () => { b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true')); calc(); }));
+    root.querySelectorAll('.presets button').forEach(b => b.addEventListener('click', () => {
+      const s = C[1].items[b.dataset.k].ing;
+      root.querySelectorAll('.chips button').forEach(c => c.setAttribute('aria-pressed', String(s.includes(c.dataset.i))));
+      calc();
+    }));
+    calc();
+  }
+};
+
+/* ======================= M3 ======================= */
+const M3 = {
+  html: () => `<div class="carta m3">${cartaHead()}${offer()}
+    <div class="list">
+      ${C.map((c,k)=>`<details name="m3-${Math.random().toString(36).slice(2,6)}" ${k===0?'open':''}>
+        <summary><h3>${c.title}</h3><span class="meta">${real(c).length} ${c.id==='pizzas'?'opciones':'platos'} · desde ${from(c)} €</span><span class="tog"><i class="ph-bold ph-caret-down"></i></span></summary>
+        <div class="body">
+          ${c.sub?`<p class="note">${c.sub}</p>`:''}${c.note?`<p class="note">${c.note}</p>`:''}
+          ${c.sized?`<div class="tbl"><span class="h"></span><span class="h r">MEDIANA</span><span class="h r">FAMILIAR</span>
+            ${c.items.map(i=>`<span class="${i.s?'sup':''}">${i.n}${i.d?`<span class="d">${i.d}</span>`:''}</span><span class="r">${eur(i.m)}</span><span class="r">${eur(i.f)}</span>`).join('')}</div>`
+          :`<ul class="one">${c.items.map(i=>`<li class="${i.s?'sup':''}"><span>${i.n}${i.d?`<span class="d">${i.d}</span>`:''}</span>${eur(i.p)}</li>`).join('')}</ul>`}
+        </div></details>`).join('')}
+      <details><summary><h3>${ING_TITLE}</h3><span class="meta">${ING.reduce((a,g)=>a+g.i.length,0)} ingredientes</span><span class="tog"><i class="ph-bold ph-caret-down"></i></span></summary>
+        <div class="body ingw">${ING.map(g=>`<div><b>${g.g}</b><p>${g.i.join(' · ')}</p></div>`).join('')}</div></details>
+    </div></div>`,
+  init(frame){
+    const root = frame.querySelector('.m3'); const name = 'acc-' + Math.random().toString(36).slice(2,7);
+    const ds = [...root.querySelectorAll('details')];
+    ds.forEach(d => d.setAttribute('name', name));
+    ds.forEach(d => d.addEventListener('toggle', () => { if (d.open) ds.forEach(o => { if (o !== d) o.open = false; }); }));
+  }
+};
+
+/* ======================= M4 ======================= */
+const M4 = {
+  html: () => { const P = C[0].items; return `<div class="carta m4">${cartaHead()}${offer()}
+    <div class="blk"><h3>PIZZAS<small>(PRECIO SEGÚN INGREDIENTES)</small></h3><p class="note">Todas las Pizzas llevan como base : Salsa de Tomate y Mozzarella</p>
+      <div class="stepper">
+        <div><div class="ctl"><button type="button" data-d="-1" aria-label="Quitar ingrediente"><i class="ph-bold ph-minus"></i></button><output>${P[0].n}</output><button type="button" data-d="1" aria-label="Añadir ingrediente"><i class="ph-bold ph-plus"></i></button></div>
+        <p class="note">SUPLEMENTO: ${P[6].m} € mediana · ${P[6].f} € familiar</p></div>
+        <div class="sizes"><div><small>MEDIANA</small><span class="eur sm-m">${P[0].m} €</span></div><div><small>FAMILIAR</small><span class="eur sm-f">${P[0].f} €</span></div></div>
+      </div></div>
+    <div class="blk"><h3>PIZZAS (SUGERENCIAS)<small>Desliza</small></h3>
+      <div class="rail">${C[1].items.map((s,k)=>`<article class="card sug"><div class="img" style="background-position:${[70,40,85,55,25][k]}% ${[50,30,60,70,45][k]}%" role="img" aria-label="Pizza ${s.n} de MAMA PIZZA"></div><div class="in"><h4>${s.n}</h4><p class="d">${s.d}</p>
+        <div class="sizes"><div><small>MEDIANA</small>${eur(s.m)}</div><div><small>FAMILIAR</small>${eur(s.f)}</div></div></div></article>`).join('')}</div></div>
+    <div class="blk"><h3>PIZZAS (PORCIONES)</h3>
+      <div class="grid">${C[2].items.map(i=>`<div class="tile ${i.s?'sup':''}"><b>${i.n}</b>${eur(i.p)}</div>`).join('')}</div></div>
+    ${C.slice(3).map(c=>{ const sups=c.items.filter(i=>i.s); return `<div class="blk"><h3>${c.title}${real(c).length>1?'<small>Desliza</small>':''}</h3>${c.note?`<p class="note">${c.note}</p>`:''}
+      <div class="rail">${real(c).map(i=>`<article class="card ${i.d?'':'sm'}"><h4>${i.n}</h4>${i.d?`<p class="d">${i.d}</p>`:''}<div class="foot">${eur(i.p)}</div></article>`).join('')}</div>
+      ${sups.map(s=>`<p class="supl">${s.n}: ${s.p} €</p>`).join('')}</div>`;}).join('')}
+    <div class="blk"><h3>${ING_TITLE}</h3><div class="ingc">${ING.map(g=>`<b>${g.g}</b>${g.i.map(x=>`<span>${x}</span>`).join('')}`).join('')}</div></div>
+  </div>`; },
+  init(frame){
+    const root = frame.querySelector('.m4'), P = C[0].items; let n = 0;
+    const out = root.querySelector('.stepper output');
+    root.querySelectorAll('.ctl button').forEach(b => b.addEventListener('click', () => {
+      n = Math.max(0, Math.min(5, n + Number(b.dataset.d)));
+      out.textContent = P[n].n; root.querySelector('.sm-m').textContent = `${P[n].m} €`; root.querySelector('.sm-f').textContent = `${P[n].f} €`;
+    }));
+  }
+};
+
+/* ======================= M5 ======================= */
+const M5 = {
+  html: () => `<div class="carta m5">${cartaHead()}${offer()}
+    <div class="board">
+      ${C.map(c=>`<section data-sec="${c.id}"><h3>${c.title}${c.sub?`<small>${c.sub}</small>`:''}</h3>${c.note?`<p class="note">${c.note}</p>`:''}
+        ${c.sized?`<div class="colh"><span>MEDIANA</span><span>FAMILIAR</span></div>`:''}
+        <ul>${c.items.map(i=>`<li class="${i.s?'sup':''}"><div class="ln"><span class="n">${i.n}</span><span class="dots"></span>${c.sized?`${eur(i.m)}${eur(i.f)}`:eur(i.p).replace('class="eur"','class="eur one"')}</div>${i.d?`<p class="d">${i.d}</p>`:''}</li>`).join('')}</ul></section>`).join('')}
+      <section data-sec="ing" class="ingl"><h3>${ING_TITLE}</h3>${ING.map(g=>`<p><b>${g.g}</b>${g.i.join(', ')}</p>`).join('')}</section>
+    </div>
+    <div class="dock">
+      <div class="scrim"></div>
+      <div class="sheet" role="dialog" aria-label="Índice de la carta"><div class="grab"></div><b>Ir a</b>
+        <nav>${C.map(c=>`<button type="button" data-id="${c.id}">${c.label}</button>`).join('')}<button type="button" data-id="ing">Ingredientes</button></nav></div>
+      <button type="button" class="fab" aria-expanded="false"><i class="ph-bold ph-list-bullets"></i>Carta</button>
+    </div></div>`,
+  init(frame){
+    const root = frame.querySelector('.m5'), dock = root.querySelector('.dock'), fab = root.querySelector('.fab');
+    const set = o => { dock.classList.toggle('open', o); fab.setAttribute('aria-expanded', String(o)); fab.innerHTML = o ? '<i class="ph-bold ph-x"></i>Cerrar' : '<i class="ph-bold ph-list-bullets"></i>Carta'; };
+    fab.addEventListener('click', () => set(!dock.classList.contains('open')));
+    root.querySelector('.scrim').addEventListener('click', () => set(false));
+    root.querySelectorAll('.sheet nav button').forEach(b => b.addEventListener('click', () => { set(false); scrollFrameTo(frame, root.querySelector(`[data-sec="${b.dataset.id}"]`), 10); }));
+  }
+};
+
+/* ======================= RENDER ======================= */
+const OPTS = { m1: M1, m2: M2, m3: M3, m4: M4, m5: M5 };
+document.querySelectorAll('.opt').forEach(sec => {
+  const O = OPTS[sec.dataset.opt];
+  sec.querySelectorAll('.frame').forEach(f => { f.innerHTML = O.html(); O.init(f); });
+});
+</script>
+</body>
+</html>

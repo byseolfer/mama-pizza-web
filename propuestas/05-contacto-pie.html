@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mama Pizza · Contacto y pie de página</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Karla:wght@400;500;700&family=Bricolage+Grotesque:opsz,wght@12..96,800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<style>
+  /* ---------- Shell ---------- */
+  :root{--shell-bg:#F3F3F1;--shell-ink:#1D1F1C;--shell-mute:#5E625C;--shell-line:#DADBD6;--tomato:#E0412F}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--shell-bg);color:var(--shell-ink);font-family:"Karla",system-ui,sans-serif;line-height:1.5}
+  .shell{max-width:1320px;margin:0 auto;padding:40px 24px 120px}
+  .shell-head h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:clamp(28px,4vw,44px);letter-spacing:-.02em;line-height:1.05}
+  .shell-head p{color:var(--shell-mute);max-width:72ch;margin-top:10px}
+  .opt{margin-top:72px}
+  .opt-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;border-top:2px solid var(--shell-ink);padding-top:16px}
+  .opt-num{font-family:"Bricolage Grotesque";font-weight:800;font-size:56px;line-height:.9;color:var(--tomato)}
+  .opt-title{font-family:"Bricolage Grotesque";font-weight:800;font-size:28px;letter-spacing:-.01em}
+  .opt-desc{flex-basis:100%;color:var(--shell-mute);max-width:80ch}
+  .stage{display:grid;grid-template-columns:1fr;gap:24px;margin-top:20px;align-items:start}
+  @media (min-width:1100px){.stage{grid-template-columns:375px minmax(0,1fr)}}
+  .frame-label{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--shell-mute);margin-bottom:8px;display:flex;gap:6px;align-items:center}
+  .frame{container-type:inline-size;position:relative;overflow-y:auto;overflow-x:hidden;border-radius:14px;background:#121310;box-shadow:0 18px 50px -20px rgba(30,40,30,.35);scrollbar-width:thin;scrollbar-color:#3a3b36 transparent}
+  .frame.desk{height:760px}
+  .frame.phone{width:375px;height:760px;border-radius:40px;border:10px solid #1D1F1C;scrollbar-width:none;margin:0 auto}
+  .frame.phone::-webkit-scrollbar{display:none}
+  .shell-note{margin-top:40px;padding:20px;border-radius:14px;background:#fff;border:1px solid var(--shell-line);font-size:15px}
+  .shell-note li{margin-left:18px;margin-top:4px}
+
+  /* ---------- Base: madera + papel (coherente con carta 05+01 e info 02) ---------- */
+  .cp{--night:#121310;--ink:#F6F3EE;--mute:#ABA8A0;--red:#E0412F;--red-p:#C8321F;--green-p:#1E6B45;--paper:#F2ECE0;--pink:#26211C;--pmute:#6B645A;--line:rgba(246,243,238,.12);
+    color:var(--ink);font-family:"Archivo",sans-serif;font-size:15px;min-height:100%;
+    background:linear-gradient(180deg,rgba(16,12,9,.62),rgba(16,12,9,.85)),url(assets/pizza.jpg) 6% 50%/cover no-repeat}
+  .cp button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+  .cp a{color:inherit}
+  .cp .ph{line-height:1}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:14px;color:#F2B8A8}
+  .eyebrow::before{content:"";width:28px;height:2px;background:var(--red)}
+  .h2{font-weight:900;font-stretch:125%;text-transform:uppercase;line-height:.9;letter-spacing:-.02em}
+  .h2 span{display:block}
+  .h3{font-weight:900;font-stretch:112%;text-transform:uppercase;line-height:1.05}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;font-weight:700;text-decoration:none;white-space:nowrap;transition:transform .2s cubic-bezier(.16,1,.3,1),background-color .2s}
+  .btn:active{transform:scale(.97)}
+  .cp .btn-red{background:var(--red);color:#fff}
+  .cp .btn-red:hover{background:#B92F1F}
+  .cp .btn-line{border:1px solid rgba(246,243,238,.35)}
+  .cp .paper{background:var(--paper);color:var(--pink);border-radius:6px;box-shadow:0 24px 50px -20px rgba(0,0,0,.75)}
+  .vichy-top{position:relative}
+  .vichy-top::before{content:"";position:absolute;left:0;right:0;top:0;height:12px;border-radius:6px 6px 0 0;background:repeating-conic-gradient(var(--red-p) 0 25%,var(--paper) 0 50%) 0 0/12px 12px;opacity:.9}
+
+  /* Formulario (etiqueta arriba, error debajo, textos literales) */
+  .form{display:grid;gap:14px}
+  .form .f{display:grid;gap:6px}
+  .form label{font-size:13px;font-weight:700;letter-spacing:.02em}
+  .form input,.form textarea{font:inherit;font-size:16px;color:var(--pink);background:#FBF8F2;border:1.5px solid rgba(38,33,28,.22);border-radius:12px;padding:12px 14px;min-height:48px;width:100%;transition:border-color .15s,box-shadow .15s}
+  .form textarea{min-height:120px;resize:vertical}
+  .form input:focus,.form textarea:focus{outline:none;border-color:var(--red-p);box-shadow:0 0 0 3px rgba(200,50,31,.18)}
+  .form .err{font-size:12.5px;font-weight:600;color:#A32617;display:none}
+  .form .f.bad input,.form .f.bad textarea{border-color:#A32617}
+  .form .f.bad .err{display:block}
+  .form .row2{display:grid;gap:14px}
+  @container (min-width:760px){.form .row2{grid-template-columns:1fr 1fr}}
+  .form .send{justify-self:start}
+  .form .done{display:none;padding:16px;border-radius:14px;background:rgba(30,107,69,.12);color:var(--green-p);font-weight:700}
+  .form .done small{display:block;font-weight:500;color:var(--pink);margin-top:2px}
+  .form.sent .f,.form.sent .row2,.form.sent .send{display:none}
+  .form.sent .done{display:block}
+  .demo{font-size:11.5px;color:var(--pmute)}
+
+  /* Datos de contacto */
+  .facts{display:grid;gap:10px}
+  .fact{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center;text-decoration:none}
+  .fact .ic{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:22px;background:var(--red);color:#fff}
+  .fact .h3{font-size:13px;color:var(--mute);font-stretch:105%}
+  .fact .v{font-size:15.5px;font-weight:600;margin-top:2px;word-break:break-word}
+
+  /* Pie */
+  .foot{position:relative;padding:32px 20px 24px;background:rgba(14,11,9,.88);border-top:1px solid var(--line)}
+  @container (min-width:760px){.foot{padding:44px 48px 28px}}
+  .foot .wm{font-weight:900;font-stretch:125%;text-transform:uppercase;font-size:clamp(46px,15cqi,150px);line-height:.85;letter-spacing:-.03em;color:var(--ink)}
+  .foot nav ul{list-style:none;display:grid;gap:2px}
+  .foot nav a{display:inline-flex;align-items:center;min-height:36px;text-decoration:none;color:var(--mute);font-size:14.5px}
+  .foot nav a:hover{color:var(--ink)}
+  .foot .sub{padding-left:14px}
+  .foot .sub a{font-size:13.5px}
+  .foot .colh{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin-bottom:8px}
+  .social{display:flex;gap:10px}
+  .social a{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line);transition:background-color .2s}
+  .social a:hover{background:rgba(246,243,238,.08)}
+  .social img{width:20px;height:20px}
+  .legal{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:13px;color:var(--mute);margin-top:24px;padding-top:16px;border-top:1px solid var(--line)}
+  .legal button,.legal a{min-height:36px;text-decoration:underline;text-underline-offset:3px;color:var(--mute)}
+  .legal button:hover{color:var(--ink)}
+  .legal .copy{margin-left:auto;text-decoration:none;display:inline-flex;align-items:center}
+
+  /* Modal aviso legal (texto literal) */
+  .dlg{position:absolute;left:0;right:0;top:0;height:100%;z-index:20;display:none;align-items:flex-end;justify-content:center;background:rgba(10,8,6,.6)}
+  @container (min-width:760px){.dlg{align-items:center}}
+  .dlg.open{display:flex}
+  .dlg .box{width:100%;max-width:520px;max-height:85%;overflow:auto;border-radius:22px 22px 0 0;padding:22px 20px}
+  @container (min-width:760px){.dlg .box{border-radius:18px}}
+  .dlg dl{display:grid;grid-template-columns:1fr;gap:2px 16px;font-size:14px;margin-top:12px}
+  @container (min-width:760px){.dlg dl{grid-template-columns:auto 1fr}}
+  .dlg dt{color:var(--pmute);font-size:12.5px;margin-top:6px}
+  @container (min-width:760px){.dlg dt{margin-top:0}}
+  .dlg dd{font-weight:600}
+  .dlg .x{float:right;width:40px;height:40px;border-radius:50%;background:rgba(38,33,28,.08);display:grid;place-items:center}
+  @media (prefers-reduced-motion:reduce){.cp *{transition:none!important;animation:none!important}}
+
+  /* =========================================================
+     01 · COMANDA
+     ========================================================= */
+  .c1 .top{padding:36px 16px 40px}
+  @container (min-width:760px){.c1 .top{padding:56px 48px;display:grid;grid-template-columns:1fr 1.15fr;gap:40px;align-items:start}}
+  .c1 .h2{font-size:clamp(38px,11cqi,72px);margin:10px 0 22px}
+  .c1 .pad{transform:rotate(1deg);padding:30px 20px 22px;margin-top:28px;
+    background:linear-gradient(transparent 31px,rgba(30,107,69,.16) 32px) 0 72px/100% 32px,var(--paper)}
+  @container (min-width:760px){.c1 .pad{margin-top:0}}
+  .c1 .pad::after{content:"";position:absolute;left:0;right:0;top:-8px;height:16px;background:radial-gradient(circle 5px at 50% 50%,#1a1612 96%,transparent) 0 0/26px 16px repeat-x}
+  .c1 .pad .h3{font-size:20px;color:var(--red-p);display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--pink)}
+  .c1 .pad .h3 small{font-size:11px;letter-spacing:.1em;color:var(--pmute)}
+  .c1 .foot{display:grid;gap:24px}
+  @container (min-width:760px){.c1 .foot{grid-template-columns:1.4fr 1fr 1fr 1fr}}
+
+  /* =========================================================
+     02 · DOS COLUMNAS SOBRIAS + WORDMARK
+     ========================================================= */
+  .c2 .top{padding:36px 16px 40px;display:grid;gap:22px}
+  @container (min-width:760px){.c2 .top{padding:56px 48px;grid-template-columns:1fr 1fr;gap:40px;align-items:start}}
+  .c2 .h2{font-size:clamp(38px,11cqi,72px);margin-top:10px}
+  .c2 .big{display:grid;gap:4px;margin-top:22px}
+  .c2 .big a,.c2 .big p{display:block;text-decoration:none;padding:16px 0;border-top:1px solid var(--line)}
+  .c2 .big small{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+  .c2 .big b{display:block;font-weight:800;font-stretch:110%;font-size:clamp(18px,5.5cqi,26px);margin-top:4px;word-break:break-word}
+  .c2 .big a:hover b{color:#F2B8A8}
+  .c2 .card{padding:30px 20px 22px}
+  .c2 .card .h3{font-size:20px;color:var(--red-p);margin-bottom:16px}
+  .c2 .foot .cols{display:grid;gap:22px}
+  @container (min-width:760px){.c2 .foot .cols{grid-template-columns:repeat(3,1fr)}}
+  .c2 .foot .wm{margin-top:30px;-webkit-text-stroke:1px rgba(246,243,238,.25);color:transparent;text-align:center}
+
+  /* =========================================================
+     03 · TICKET DE CAJA
+     ========================================================= */
+  .c3 .top{padding:36px 16px 20px}
+  @container (min-width:760px){.c3 .top{padding:56px 48px 24px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}}
+  .c3 .h2{font-size:clamp(38px,11cqi,72px);margin:10px 0 20px}
+  .c3 .note{padding:28px 20px 22px;margin-top:22px}
+  @container (min-width:760px){.c3 .note{margin-top:0}}
+  .c3 .note .h3{font-size:20px;color:var(--red-p);margin-bottom:16px}
+  .cp:is(.c3,.c23) .ticketwrap{padding:10px 16px 40px;display:flex;justify-content:center}
+  .cp:is(.c3,.c23) .ticket{width:100%;max-width:380px;background:#FBF8F2;color:var(--pink);font-family:"Archivo";font-stretch:85%;padding:26px 22px 30px;position:relative;box-shadow:0 30px 50px -20px rgba(0,0,0,.8);
+    -webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/16px 51% repeat-x,conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/16px 51% repeat-x;
+    mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/16px 51% repeat-x,conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/16px 51% repeat-x}
+  .cp:is(.c3,.c23) .ticket .tw{text-align:center;font-weight:900;font-stretch:125%;font-size:30px;letter-spacing:-.01em;line-height:1}
+  .cp:is(.c3,.c23) .ticket .ts{text-align:center;font-size:12.5px;margin-top:6px;line-height:1.4}
+  .cp:is(.c3,.c23) .ticket hr{border:0;border-top:1.5px dashed rgba(38,33,28,.4);margin:14px 0}
+  .cp:is(.c3,.c23) .ticket .ln{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;padding:3px 0;text-decoration:none}
+  .cp:is(.c3,.c23) .ticket .ln span:last-child{text-align:right}
+  .cp:is(.c3,.c23) .ticket .grp{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--pmute);margin-bottom:4px}
+  .cp:is(.c3,.c23) .ticket nav a{display:flex;justify-content:space-between;text-decoration:none;font-size:13.5px;padding:4px 0}
+  .cp:is(.c3,.c23) .ticket nav a::after{content:"→";color:var(--pmute)}
+  .cp:is(.c3,.c23) .ticket .soc{display:flex;justify-content:center;gap:10px;margin-top:6px}
+  .cp:is(.c3,.c23) .ticket .soc a{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;border:1.5px solid rgba(38,33,28,.3)}
+  .cp:is(.c3,.c23) .ticket .soc img{width:18px;height:18px}
+  .cp:is(.c3,.c23) .ticket .lg{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 12px;font-size:12px}
+  .cp:is(.c3,.c23) .ticket .lg button{min-height:34px;text-decoration:underline;color:var(--pmute)}
+  .cp:is(.c3,.c23) .ticket .bar{height:42px;margin:14px auto 4px;width:80%;background:repeating-linear-gradient(90deg,var(--pink) 0 2px,transparent 2px 4px,var(--pink) 4px 5px,transparent 5px 8px,var(--pink) 8px 11px,transparent 11px 12px)}
+  .cp:is(.c3,.c23) .ticket .thx{text-align:center;font-weight:800;font-size:13px;letter-spacing:.06em}
+
+  /* =========================================================
+     04 · ACCIONES RÁPIDAS + FORMULARIO DESPLEGABLE
+     ========================================================= */
+  .c4 .top{padding:36px 16px 40px}
+  @container (min-width:760px){.c4 .top{padding:56px 48px}}
+  .c4 .h2{font-size:clamp(38px,11cqi,72px);margin-top:10px}
+  .c4 .acts{display:grid;gap:10px;margin-top:22px}
+  @container (min-width:760px){.c4 .acts{grid-template-columns:repeat(3,1fr);gap:14px}}
+  .c4 .act{display:flex;flex-direction:column;gap:14px;padding:20px;text-decoration:none;min-height:150px;transition:transform .25s cubic-bezier(.16,1,.3,1)}
+  .c4 .act:hover{transform:translateY(-3px) rotate(-.5deg)}
+  .c4 .act i.big{font-size:30px;color:var(--red-p)}
+  .c4 .act .h3{font-size:15px;color:var(--pmute)}
+  .c4 .act b{font-weight:800;font-stretch:108%;font-size:18px;word-break:break-word}
+  .c4 .act .go{margin-top:auto;font-size:13px;font-weight:700;color:var(--red-p);display:inline-flex;align-items:center;gap:6px}
+  .c4 details{margin-top:14px;padding:0 20px}
+  .c4 summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;min-height:64px;padding-top:12px}
+  .c4 summary::-webkit-details-marker{display:none}
+  .c4 summary .h3{font-size:18px;color:var(--red-p)}
+  .c4 summary i{font-size:20px;transition:transform .3s}
+  .c4 details[open] summary i{transform:rotate(45deg)}
+  .c4 details .form{padding:6px 0 22px}
+  .c4 .cloth{height:22px;background:repeating-conic-gradient(var(--red-p) 0 25%,var(--paper) 0 50%) 0 0/22px 22px}
+  .c4 .foot{background:var(--night);text-align:center;display:grid;gap:22px;justify-items:center}
+  .c4 .foot nav ul{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+  .c4 .foot nav a{padding:0 12px;border:1px solid var(--line);border-radius:999px;min-height:38px}
+  .c4 .foot .sub{display:none}
+  .c4 .legal{justify-content:center;width:100%}
+  .c4 .legal .copy{margin-left:0}
+
+  /* =========================================================
+     05 · CIERRE CON GRAN CTA + FORMULARIO EN PANEL
+     ========================================================= */
+  .c5 .cta{margin:28px 12px 0;padding:34px 22px;border-radius:26px;background:var(--red);color:#fff;position:relative;overflow:hidden}
+  @container (min-width:760px){.c5 .cta{margin:48px 48px 0;padding:48px;display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px}}
+  .c5 .cta::after{content:"";position:absolute;right:-60px;bottom:-60px;width:220px;height:220px;border-radius:50%;background:repeating-conic-gradient(rgba(255,255,255,.14) 0 25%,transparent 0 50%) 0 0/22px 22px}
+  .c5 .cta .h2{font-size:clamp(40px,12cqi,90px)}
+  .c5 .cta .tel{display:block;font-weight:900;font-stretch:125%;font-size:clamp(34px,10cqi,64px);line-height:1;text-decoration:none;margin-top:10px}
+  .c5 .cta p{font-weight:700;font-size:13px;letter-spacing:.04em;margin-top:10px;opacity:.9;max-width:40ch}
+  .c5 .cta .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;position:relative;z-index:1}
+  .c5 .cta .btn-w{background:#fff;color:var(--red-p)}
+  .c5 .cta .btn-o{border:1.5px solid rgba(255,255,255,.6);color:#fff}
+  .c5 .info{display:grid;gap:12px;padding:26px 16px}
+  @container (min-width:760px){.c5 .info{grid-template-columns:repeat(3,1fr);padding:28px 48px}}
+  .c5 .info .fact{padding:14px;border-radius:18px;background:rgba(14,11,9,.6);border:1px solid var(--line)}
+  .c5 .foot{display:grid;gap:22px}
+  @container (min-width:760px){.c5 .foot{grid-template-columns:1.6fr 1fr 1fr}}
+  .c5 .sheet{position:absolute;left:0;right:0;top:0;height:100%;z-index:15;display:none;align-items:flex-end;justify-content:center;background:rgba(10,8,6,.6)}
+  @container (min-width:760px){.c5 .sheet{align-items:center}}
+  .c5 .sheet.open{display:flex}
+  .c5 .sheet .box{width:100%;max-width:560px;max-height:90%;overflow:auto;border-radius:24px 24px 0 0;padding:26px 20px 22px}
+  @container (min-width:760px){.c5 .sheet .box{border-radius:18px}}
+  .c5 .sheet .h3{font-size:20px;color:var(--red-p);margin-bottom:16px}
+  @media (prefers-reduced-motion:no-preference){.c5 .sheet.open .box,.dlg.open .box{animation:up .4s cubic-bezier(.16,1,.3,1)}@keyframes up{from{transform:translateY(30px);opacity:0}}}
+
+  /* =========================================================
+     COMBINACIÓN 02 + TICKET DE LA 03
+     ========================================================= */
+  .c23 .ticketwrap{padding:36px 16px 48px;background:rgba(14,11,9,.55);border-top:1px solid var(--line)}
+  .c23 .ticket .lang{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13.5px}
+  .c23 .ticket .lang select{font:inherit;font-size:14px;color:var(--pink);background:transparent;border:1.5px solid rgba(38,33,28,.3);border-radius:8px;min-height:40px;padding:0 8px}
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <header class="shell-head">
+    <h1>Componente 4 · Contacto ("Todo de un vistazo") y pie de página</h1>
+    <p>Mismo fondo de madera y papel que la carta y los cupones elegidos. Incluye los datos de contacto, el formulario "Envíenos su mensaje" con sus textos y mensajes de error literales, y el pie con la navegación, tripAdvisor, Facebook, Aviso legal (se abre con los datos literales), Política de privacidad y cookies. Prueba a pulsar "Enviar" con campos vacíos.</p>
+  </header>
+
+  <section class="opt" data-o="c23">
+    <div class="opt-head"><span class="opt-num" style="font-size:44px">02 + 03</span><span class="opt-title">Sobria con firma + pie en ticket</span>
+      <p class="opt-desc">Tu combinación: contacto en grande y formulario en papel (02), y el pie de página como ticket de caja (03). Como la web mantiene los 16 idiomas, el ticket incluye el selector de idioma con los mismos nombres que la web actual.</p></div>
+    <div class="stage"><div><div class="frame-label"><i class="ph ph-device-mobile"></i>Móvil</div><div class="frame phone"></div></div><div><div class="frame-label"><i class="ph ph-desktop"></i>Escritorio</div><div class="frame desk"></div></div></div>
+  </section>
+
+  <section class="opt" data-o="c1">
+    <div class="opt-head"><span class="opt-num">01</span><span class="opt-title">Comanda</span>
+      <p class="opt-desc">El formulario es una libreta de comandas de camarero: papel rayado, anillas arriba y ligeramente girada. Los datos de contacto van como fichas con icono rojo. Pie oscuro con "MAMA PIZZA" grande y cuatro columnas.</p></div>
+    <div class="stage"><div><div class="frame-label"><i class="ph ph-device-mobile"></i>Móvil</div><div class="frame phone"></div></div><div><div class="frame-label"><i class="ph ph-desktop"></i>Escritorio</div><div class="frame desk"></div></div></div>
+  </section>
+
+  <section class="opt" data-o="c2">
+    <div class="opt-head"><span class="opt-num">02</span><span class="opt-title">Sobria con firma</span>
+      <p class="opt-desc">Datos de contacto en grande y muy legibles a la izquierda, y el formulario en una hoja de papel a la derecha. El pie termina con "MAMA PIZZA" gigante en contorno, como una firma. La más elegante y limpia.</p></div>
+    <div class="stage"><div><div class="frame-label"><i class="ph ph-device-mobile"></i>Móvil</div><div class="frame phone"></div></div><div><div class="frame-label"><i class="ph ph-desktop"></i>Escritorio</div><div class="frame desk"></div></div></div>
+  </section>
+
+  <section class="opt" data-o="c3">
+    <div class="opt-head"><span class="opt-num">03</span><span class="opt-title">Ticket de caja</span>
+      <p class="opt-desc">El pie de página es un ticket de caja con borde dentado: dirección, teléfono y correo como líneas del ticket, la navegación como lista, redes, enlaces legales y hasta un código de barras decorativo. Muy original y coherente con los cupones.</p></div>
+    <div class="stage"><div><div class="frame-label"><i class="ph ph-device-mobile"></i>Móvil</div><div class="frame phone"></div></div><div><div class="frame-label"><i class="ph ph-desktop"></i>Escritorio</div><div class="frame desk"></div></div></div>
+  </section>
+
+  <section class="opt" data-o="c4">
+    <div class="opt-head"><span class="opt-num">04</span><span class="opt-title">Acciones rápidas</span>
+      <p class="opt-desc">Tres tarjetas de papel grandes que hacen algo al tocarlas: llamar, escribir un correo o abrir el mapa. El formulario queda plegado debajo para quien lo necesite. Un mantel de vichy separa el pie, centrado y con la navegación en píldoras. La más práctica en móvil.</p></div>
+    <div class="stage"><div><div class="frame-label"><i class="ph ph-device-mobile"></i>Móvil</div><div class="frame phone"></div></div><div><div class="frame-label"><i class="ph ph-desktop"></i>Escritorio</div><div class="frame desk"></div></div></div>
+  </section>
+
+  <section class="opt" data-o="c5">
+    <div class="opt-head"><span class="opt-num">05</span><span class="opt-title">Gran cierre</span>
+      <p class="opt-desc">La página termina con un gran bloque rojo "Haz tu reserva" y el teléfono enorme, porque llamar es lo que más interesa. El formulario se abre en un panel al pulsar "Envíenos su mensaje". Debajo, los tres datos de contacto y el pie.</p></div>
+    <div class="stage"><div><div class="frame-label"><i class="ph ph-device-mobile"></i>Móvil</div><div class="frame phone"></div></div><div><div class="frame-label"><i class="ph ph-desktop"></i>Escritorio</div><div class="frame desk"></div></div></div>
+  </section>
+
+  <div class="shell-note">
+    <b>Notas</b>
+    <ul>
+      <li>Textos literales: "Todo de un vistazo", "Encuéntrenos", "Envíenos un correo electrónico", "Llámenos", "Envíenos su mensaje", las etiquetas del formulario (incluida "su teléfono" en minúscula, como en la web), "Enviar", los mensajes de error, éxito y fallo, el aviso legal completo y los enlaces del pie.</li>
+      <li>Se elimina la línea "Diseñado por DISH Digital Solutions GmbH...", porque el nuevo diseño ya no es de DISH. Se añade "© 2026 MAMA PIZZA".</li>
+      <li>El formulario de la maqueta es una demostración: al enviarlo muestra el mensaje de éxito sin mandar nada. En la web final hay que conectarlo a un servicio de envío de correo, ya que el actual depende de la plataforma DISH.</li>
+      <li>Decisión pendiente: la web actual se traduce automáticamente a 16 idiomas. Hay que decidir si la nueva será solo en español o también en otros idiomas (por ejemplo inglés), porque afecta al SEO internacional (hreflang).</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+/* ======================= DATOS LITERALES ======================= */
+const C = {
+  h2a:'Todo', h2b:'de un vistazo',
+  find:{h3:'Encuéntrenos', l:['Calle Parvillas Altas 6','28021 Madrid','España'], href:'https://www.google.com/maps/search/?api=1&query=Calle+Parvillas+Altas+6,+28021+Madrid'},
+  mail:{h3:'Envíenos un correo electrónico', v:'mamapizza6@gmail.com', href:'mailto:mamapizza6@gmail.com'},
+  call:{h3:'Llámenos', v:'+34917954422', href:'tel:+34917954422'}
+};
+const FORM = {
+  title:'Envíenos su mensaje',
+  f:[
+    {id:'name', l:'Su nombre', t:'text', ac:'name', e:'Introduzca su nombre.'},
+    {id:'email', l:'Su correo electrónico', t:'email', ac:'email', e:'Introduzca su dirección de correo electrónico.', e2:'Introduzca una dirección de correo electrónico válida'},
+    {id:'tel', l:'su teléfono', t:'tel', ac:'tel', e:'Introduzca su número de teléfono.', e2:'Introduzca un número de teléfono válido'},
+    {id:'subj', l:'Asunto', t:'text', ac:'off', e:'Introduzca su asunto.'},
+    {id:'msg', l:'Su mensaje', t:'area', e:'Introduzca su mensaje.'}
+  ],
+  send:'Enviar', ok:'Su mensaje ha sido enviado.', ok2:'Le contestaremos a la mayor brevedad.', fail:'Fallo en el envío del mensaje'
+};
+const NAV = [
+  ['Menú','#menu',[['Ingredientes','https://cdn.website.dish.co/media/30/42/4655350/Ingredientes.pdf'],['Menú','https://cdn.website.dish.co/media/3e/6e/9716432/Menu.pdf'],['Porciones','https://cdn.website.dish.co/media/3d/56/9716433/Porciones.pdf']]],
+  ['Dónde estamos','#map'],['Horarios de apertura','#times'],['Opciones de pago','#payment'],['Sobre nosotros','#aboutUs'],['Servicios','#services'],['Contacto','#contact'],['Reserva','#reservation']
+];
+const SOC = [
+  ['tripAdvisor','https://www.tripadvisor.es/Restaurant_Review-g187514-d11658438-Reviews-Mama_Pizza-Madrid.html','tripadvisor'],
+  ['facebook','https://m.facebook.com/mamapizzavillaverde/?locale2=es_ES','facebook']
+];
+const LEGAL = [
+  ['Nombre del negocio','SEGOVIA BLANCO'],['Nombre y forma jurídica de la empresa','S.L.'],['Nombre','JOSE'],['Apellido','SEGOVIA'],
+  ['Dirección postal','PARVILLAS ALTAS 6'],['Código postal','28021'],['Localidad','MADRID'],['País','ESPAÑA'],
+  ['Número de teléfono','+34639961541'],['Dirección de correo electrónico','mamapizza6@gmail.com'],['Registro','Registro de Sociedad'],
+  ['Número de registro','Tomo 1560 Folio 177 Hoja 28621'],['Número de identificación fiscal','B80102528'],['Responsable','José Segovia']
+];
+
+/* ======================= PIEZAS ======================= */
+let uid = 0;
+const formHTML = () => { const u = ++uid; return `<form class="form" novalidate>
+  <div class="row2">${FORM.f.slice(0,2).map(f => field(f,u)).join('')}</div>
+  <div class="row2">${FORM.f.slice(2,4).map(f => field(f,u)).join('')}</div>
+  ${field(FORM.f[4],u)}
+  <button class="btn btn-red send" type="submit"><i class="ph-bold ph-paper-plane-tilt"></i>${FORM.send}</button>
+  <p class="done" role="status">${FORM.ok}<small>${FORM.ok2}</small></p>
+  <p class="demo">Maqueta: no se envía ningún dato.</p>
+</form>`; };
+const field = (f, u) => `<div class="f" data-id="${f.id}"><label for="${f.id}-${u}">${f.l}</label>${f.t === 'area'
+  ? `<textarea id="${f.id}-${u}" name="${f.id}" required></textarea>`
+  : `<input id="${f.id}-${u}" name="${f.id}" type="${f.t}" autocomplete="${f.ac}" required>`}<span class="err" id="${f.id}-${u}-e">${f.e}</span></div>`;
+const facts = () => `<div class="facts">
+  <a class="fact" href="${C.find.href}" target="_blank" rel="noopener"><span class="ic"><i class="ph-fill ph-map-pin"></i></span><span><h3 class="h3">${C.find.h3}</h3><span class="v">${C.find.l.join(', ')}</span></span></a>
+  <a class="fact" href="${C.mail.href}"><span class="ic"><i class="ph-fill ph-envelope-simple"></i></span><span><h3 class="h3">${C.mail.h3}</h3><span class="v">${C.mail.v}</span></span></a>
+  <a class="fact" href="${C.call.href}"><span class="ic"><i class="ph-fill ph-phone"></i></span><span><h3 class="h3">${C.call.h3}</h3><span class="v">${C.call.v}</span></span></a>
+</div>`;
+const navHTML = () => `<nav aria-label="Pie de página"><ul>${NAV.map(([t,h,sub]) => `<li><a href="${h}">${t}</a>${sub ? `<ul class="sub">${sub.map(([s,sh]) => `<li><a href="${sh}" target="_blank" rel="noopener">${s}</a></li>`).join('')}</ul>` : ''}</li>`).join('')}</ul></nav>`;
+const socialHTML = () => `<div class="social">${SOC.map(([t,h,slug]) => `<a href="${h}" target="_blank" rel="noopener" aria-label="${t}" title="${t}"><img src="https://cdn.simpleicons.org/${slug}/F6F3EE" alt=""></a>`).join('')}</div>`;
+const legalHTML = () => `<div class="legal"><button type="button" class="open-legal">Aviso legal</button><a href="https://website.dish.co/privacywebsite/data?id=1004590&standalone=TRUE&lang=es&modaldisplay=false" target="_blank" rel="noopener">Política de privacidad</a><button type="button">Cambiar configuración de cookies</button><span class="copy">© 2026 MAMA PIZZA</span></div>`;
+const dialogHTML = () => `<div class="dlg" role="dialog" aria-modal="true" aria-label="Aviso legal"><div class="box paper"><button type="button" class="x close-legal" aria-label="Cerrar"><i class="ph-bold ph-x"></i></button>
+  <h2 class="h3" style="font-size:22px;color:var(--red-p)">Aviso legal</h2><dl>${LEGAL.map(([k,v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
+  <button type="button" class="btn btn-red close-legal" style="margin-top:18px">Cerrar</button></div></div>`;
+const footHead = () => `<div class="wm" aria-hidden="true">MAMA PIZZA</div>`;
+
+/* ======================= 01 · COMANDA ======================= */
+const R1 = () => `<div class="cp c1">
+  <div class="top" id="contact">
+    <div><span class="eyebrow">Contacto</span><h2 class="h2"><span>${C.h2a}</span><span>${C.h2b}</span></h2>${facts()}</div>
+    <div class="paper pad" style="position:relative"><h3 class="h3">${FORM.title}<small>COMANDA Nº 1</small></h3>${formHTML()}</div>
+  </div>
+  <footer class="foot">
+    <div><h2 class="wm" style="font-size:clamp(40px,12cqi,72px)">MAMA PIZZA</h2>${socialHTML()}</div>
+    <div><p class="colh">Menú</p>${navHTML().replace('<ul>', '<ul data-c="a">')}</div>
+    <div><p class="colh">${C.find.h3}</p><p style="color:var(--mute);font-size:14.5px">${C.find.l.join('<br>')}</p></div>
+    <div><p class="colh">${C.call.h3}</p><a href="${C.call.href}" style="font-weight:800;text-decoration:none">${C.call.v}</a><p class="colh" style="margin-top:14px">${C.mail.h3}</p><a href="${C.mail.href}" style="color:var(--mute);font-size:14px;word-break:break-word">${C.mail.v}</a></div>
+    <div style="grid-column:1/-1">${legalHTML()}</div>
+  </footer>
+  ${dialogHTML()}
+</div>`;
+
+/* ======================= 02 · SOBRIA CON FIRMA ======================= */
+const R2 = () => `<div class="cp c2">
+  <div class="top" id="contact">
+    <div><span class="eyebrow">Contacto</span><h2 class="h2"><span>${C.h2a}</span><span>${C.h2b}</span></h2>
+      <div class="big">
+        <a href="${C.find.href}" target="_blank" rel="noopener"><small>${C.find.h3}</small><b>${C.find.l.join(', ')}</b></a>
+        <a href="${C.mail.href}"><small>${C.mail.h3}</small><b>${C.mail.v}</b></a>
+        <a href="${C.call.href}"><small>${C.call.h3}</small><b>${C.call.v}</b></a>
+      </div></div>
+    <div class="paper card vichy-top"><h3 class="h3">${FORM.title}</h3>${formHTML()}</div>
+  </div>
+  <footer class="foot">
+    <div class="cols">
+      <div><p class="colh">MAMA PIZZA</p><p style="color:var(--mute);font-size:14.5px;margin-bottom:14px">${C.find.l.join('<br>')}</p>${socialHTML()}</div>
+      <div><p class="colh">Menú</p>${navHTML()}</div>
+      <div><p class="colh">${C.call.h3}</p><a href="${C.call.href}" style="font-weight:800;font-size:20px;text-decoration:none">${C.call.v}</a></div>
+    </div>
+    ${legalHTML()}
+    ${footHead()}
+  </footer>
+  ${dialogHTML()}
+</div>`;
+
+/* ======================= 03 · TICKET DE CAJA ======================= */
+const R3 = () => `<div class="cp c3">
+  <div class="top" id="contact">
+    <div><span class="eyebrow">Contacto</span><h2 class="h2"><span>${C.h2a}</span><span>${C.h2b}</span></h2>${facts()}</div>
+    <div class="paper note vichy-top"><h3 class="h3">${FORM.title}</h3>${formHTML()}</div>
+  </div>
+  <footer class="ticketwrap">
+    <div class="ticket">
+      <h2 class="tw">MAMA PIZZA</h2>
+      <p class="ts">${C.find.l.join('<br>')}</p>
+      <hr>
+      <a class="ln" href="${C.call.href}"><span>${C.call.h3}</span><span>${C.call.v}</span></a>
+      <a class="ln" href="${C.mail.href}"><span>Correo</span><span>${C.mail.v}</span></a>
+      <hr>
+      <p class="grp">MENÚ</p>
+      <nav aria-label="Pie de página">${NAV.map(([t,h]) => `<a href="${h}">${t}</a>`).join('')}</nav>
+      <hr>
+      <div class="soc">${SOC.map(([t,h,slug]) => `<a href="${h}" target="_blank" rel="noopener" aria-label="${t}"><img src="https://cdn.simpleicons.org/${slug}/26211C" alt=""></a>`).join('')}</div>
+      <hr>
+      <div class="lg"><button type="button" class="open-legal">Aviso legal</button><button type="button">Política de privacidad</button><button type="button">Cambiar configuración de cookies</button></div>
+      <div class="bar" aria-hidden="true"></div>
+      <p class="thx">© 2026 MAMA PIZZA</p>
+    </div>
+  </footer>
+  ${dialogHTML()}
+</div>`;
+
+/* ======================= 04 · ACCIONES RÁPIDAS ======================= */
+const R4 = () => `<div class="cp c4">
+  <div class="top" id="contact">
+    <span class="eyebrow">Contacto</span><h2 class="h2"><span>${C.h2a}</span><span>${C.h2b}</span></h2>
+    <div class="acts">
+      <a class="act paper" href="${C.call.href}"><i class="ph-fill ph-phone big"></i><h3 class="h3">${C.call.h3}</h3><b>${C.call.v}</b><span class="go">Llamar ahora<i class="ph-bold ph-arrow-right"></i></span></a>
+      <a class="act paper" href="${C.mail.href}"><i class="ph-fill ph-envelope-simple big"></i><h3 class="h3">${C.mail.h3}</h3><b>${C.mail.v}</b><span class="go">Escribir correo<i class="ph-bold ph-arrow-right"></i></span></a>
+      <a class="act paper" href="${C.find.href}" target="_blank" rel="noopener"><i class="ph-fill ph-map-pin big"></i><h3 class="h3">${C.find.h3}</h3><b>${C.find.l.join(', ')}</b><span class="go">Abrir mapa<i class="ph-bold ph-arrow-right"></i></span></a>
+    </div>
+    <details class="paper"><summary><h3 class="h3">${FORM.title}</h3><i class="ph-bold ph-plus"></i></summary>${formHTML()}</details>
+  </div>
+  <div class="cloth" aria-hidden="true"></div>
+  <footer class="foot">
+    <h2 class="wm" style="font-size:clamp(44px,13cqi,96px)">MAMA PIZZA</h2>
+    ${navHTML()}
+    ${socialHTML()}
+    ${legalHTML()}
+  </footer>
+  ${dialogHTML()}
+</div>`;
+
+/* ======================= 05 · GRAN CIERRE ======================= */
+const R5 = () => `<div class="cp c5">
+  <section class="cta" id="reservation">
+    <div><h2 class="h2"><span>Haz tu</span><span>reserva</span></h2><a class="tel" href="tel:+34917954422">917954422</a><p>LLÁMANOS Y RESERVA TU PEDIDO PARA LA HORA QUE QUIERAS</p></div>
+    <div class="btns"><a class="btn btn-w" href="tel:+34917954422"><i class="ph-bold ph-phone"></i>Reserva</a><button type="button" class="btn btn-o open-form"><i class="ph-bold ph-chat-text"></i>${FORM.title}</button></div>
+  </section>
+  <div class="info" id="contact">${facts().replace('<div class="facts">','').replace(/<\/div>\s*$/,'')}</div>
+  <footer class="foot">
+    <div><h2 class="wm" style="font-size:clamp(40px,12cqi,80px)">MAMA PIZZA</h2><p style="color:var(--mute);font-size:13px;margin:8px 0 14px">${C.h2a} ${C.h2b}</p>${socialHTML()}</div>
+    <div><p class="colh">Menú</p>${navHTML()}</div>
+    <div><p class="colh">${C.find.h3}</p><p style="color:var(--mute);font-size:14.5px">${C.find.l.join('<br>')}</p></div>
+    <div style="grid-column:1/-1">${legalHTML()}</div>
+  </footer>
+  <div class="sheet" role="dialog" aria-modal="true" aria-label="${FORM.title}"><div class="box paper vichy-top"><button type="button" class="x close-form" aria-label="Cerrar" style="float:right;width:40px;height:40px;border-radius:50%;background:rgba(38,33,28,.08);display:grid;place-items:center"><i class="ph-bold ph-x"></i></button><h3 class="h3">${FORM.title}</h3>${formHTML()}</div></div>
+  ${dialogHTML()}
+</div>`;
+
+const LANGS = ['Español','Čeština','Deutsch','English','Français','Hrvatski','Italiano','Magyar','Nederlands','Polski','Português','Română','Русский','Slovensky','Türkçe','Українська'];
+const R23 = () => R2().replace(/<footer class="foot">[\s\S]*?<\/footer>/, R3().match(/<footer class="ticketwrap">[\s\S]*?<\/footer>/)[0]
+    .replace('<p class="grp">MENÚ</p>', '<p class="grp">MENÚ</p>')
+    .replace('<div class="bar"', `<hr><label class="lang"><span>Idioma</span><select aria-label="Idioma">${LANGS.map(l => `<option${l === 'Español' ? ' selected' : ''}>${l}</option>`).join('')}</select></label><div class="bar"`))
+  .replace('class="cp c2"', 'class="cp c2 c23"');
+
+/* ======================= RENDER + INTERACCIÓN ======================= */
+const R = { c1:R1, c2:R2, c3:R3, c4:R4, c5:R5, c23:R23 };
+const emailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+const telOk = v => /^[+\d][\d\s-]{6,}$/.test(v.trim());
+document.querySelectorAll('.opt').forEach(sec => sec.querySelectorAll('.frame').forEach(fr => {
+  fr.innerHTML = R[sec.dataset.o]();
+  fr.querySelectorAll('form.form').forEach(form => form.addEventListener('submit', e => {
+    e.preventDefault(); let first = null;
+    FORM.f.forEach(f => {
+      const box = form.querySelector(`[data-id="${f.id}"]`), el = box.querySelector('input,textarea'), err = box.querySelector('.err'), v = el.value.trim();
+      let msg = '';
+      if (!v) msg = f.e; else if (f.id === 'email' && !emailOk(v)) msg = f.e2; else if (f.id === 'tel' && !telOk(v)) msg = f.e2;
+      box.classList.toggle('bad', !!msg); err.textContent = msg || f.e;
+      el.setAttribute('aria-invalid', String(!!msg)); el.setAttribute('aria-describedby', err.id);
+      if (msg && !first) first = el;
+    });
+    if (first) { first.focus({ preventScroll: false }); return; }
+    form.classList.add('sent');
+  }));
+  // En la maqueta los paneles se colocan sobre la zona visible del marco (en la web real serán position:fixed)
+  const show = el => { el.style.top = fr.scrollTop + 'px'; el.style.height = fr.clientHeight + 'px'; el.classList.add('open'); fr.style.overflowY = 'hidden'; };
+  const hide = el => { el.classList.remove('open'); fr.style.overflowY = ''; };
+  const dlg = fr.querySelector('.dlg');
+  fr.querySelectorAll('.open-legal').forEach(b => b.addEventListener('click', () => show(dlg)));
+  fr.querySelectorAll('.close-legal').forEach(b => b.addEventListener('click', () => hide(dlg)));
+  dlg.addEventListener('click', e => { if (e.target === dlg) hide(dlg); });
+  const sh = fr.querySelector('.c5 .sheet');
+  if (sh) {
+    fr.querySelectorAll('.open-form').forEach(b => b.addEventListener('click', () => show(sh)));
+    fr.querySelectorAll('.close-form').forEach(b => b.addEventListener('click', () => hide(sh)));
+    sh.addEventListener('click', e => { if (e.target === sh) hide(sh); });
+  }
+}));
+</script>
+</body>
+</html>
